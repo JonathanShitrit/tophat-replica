@@ -2,7 +2,7 @@
   "name": "tophat-replica",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "npm run build-client && node ./",
     "dev": "nodemon ./",

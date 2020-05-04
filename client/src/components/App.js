@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Signup from './Signup';
+import Login from './Login';
 
 class App extends Component {
 
@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
 
-      <Signup />
+      <Login />
 
     );
   }

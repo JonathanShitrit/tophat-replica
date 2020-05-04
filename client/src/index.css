@@ -50,13 +50,27 @@ body, html, .App, #root, .auth-wrapper {
   background-image: linear-gradient( 112.9deg,  rgba(112,255,151,1) 6.2%, rgba(70,195,255,1) 99.7% );
 }
 
-.auth-inner {
+.auth-signup {
   width: 450px;
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 55px 45px 55px;
   border-radius: 15px;
+  /* border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px; */
+  transition: all .3s;
+}
+
+.auth-signin {
+  width: 450px;
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 40px 55px 45px 55px;
+  border-radius: 15px;
+  /* border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px; */
   transition: all .3s;
 }
 
@@ -67,6 +81,7 @@ body, html, .App, #root, .auth-wrapper {
 
 .form-control {
   padding: 12px 20px;
+  font-size: 14px;
 }
 
 .auth-wrapper h3 {
@@ -78,6 +93,10 @@ body, html, .App, #root, .auth-wrapper {
 
 .custom-control-label {
   font-weight: 400;
+}
+
+::placeholder {
+  font-size: 14px;
 }
 
 .forgot-password,

@@ -1,0 +1,29 @@
+[
+    {
+        "QuestionNumber": "Q1",
+        "QuestionType": "MULTIPLE",
+        "QuestionText": "Who was NOT the first president of USA?",
+        "Choices": [
+            {
+                "Choice": "Abraham Lincoln",
+                "IsAnswer": "True"
+            },
+            {
+                "Choice": "George Washington",
+                "IsAnswer": "False"
+            },
+            {
+                "Choice": "John F. Kennedy",
+                "IsAnswer": "True"
+            }
+        ],
+        "TextboxAnswer": ""
+    },
+    {
+        "QuestionNumber": "Q2",
+        "QuestionType": "TEXTBOX",
+        "QuestionText": "Who was the first president of USA?",
+        "Choices": [],
+        "TextboxAnswer": "George Washington"
+    }
+]

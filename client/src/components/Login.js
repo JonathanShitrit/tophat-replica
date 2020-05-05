@@ -1,10 +1,24 @@
 import React, { Component } from "react";
 
+
+const Warning = () => (
+    <div className="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+)
+
 class Login extends Component {
-    state = { isSigninVisible: false };
+    state = { isSigninVisible: false, showWarning: false };
 
     toggelSignin = () => {
         this.setState({ isSigninVisible: !this.state.isSigninVisible });
+    };
+
+    toggelWarning = () => {
+        this.setState({ showWarning: !this.state.showWarning });
     };
 
     render() {
@@ -27,6 +41,10 @@ class Login extends Component {
                                 <label>Password</label>
                                 <input type="password" className="form-control" placeholder="Enter password" />
                             </div>
+
+                            {this.state.showWarning ? (
+                                <Warning />
+                            ) : (<div></div>)}
 
                             <button type="submit" className="btn btn-primary btn-block btn-lg">Sign in</button>
                             <p className="forgot-password text-right">
@@ -68,6 +86,11 @@ class Login extends Component {
                                     <label>Password</label>
                                     <input type="password" className="form-control" placeholder="Enter password" />
                                 </div>
+
+                                {this.state.showWarning ? (
+                                    <Warning />
+                                ) : (<div></div>)}
+
 
                                 <button type="submit" className="btn btn-primary btn-block btn-lg">Sign up</button>
                                 <p className="forgot-password text-right">

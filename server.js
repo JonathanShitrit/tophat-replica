@@ -2,6 +2,8 @@ const express = require("express");
 const request = require("request");
 const path = require("path");
 const questionSet = require("./client/src/questionSet.json");
+var mongoose = require('mongoose');
+const router = express.Router();
 
 const app = express();
 
@@ -41,12 +43,12 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost:27017/tophat',
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
-  () => {
-    console.log('Connected to DB');
-  });
+    process.env.MONGODB_URI || 'mongodb://localhost:27017/tophat',
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+    () => {
+        console.log('Connected to DB');
+    });
 
-server.use('/api/user', require('./routes/api/user'));
+app.use('/api/users', require('./routes/api/users'));
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));

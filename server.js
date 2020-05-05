@@ -1,6 +1,8 @@
 const express = require("express");
 const request = require("request");
 const path = require("path");
+var mongoose = require('mongoose');
+const router = express.Router();
 
 const app = express();
 
@@ -42,6 +44,6 @@ mongoose.connect(
     console.log('Connected to DB');
   });
 
-server.use('/api/user', require('./routes/api/user'));
+app.use('/api/users', require('./routes/api/users'));
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));

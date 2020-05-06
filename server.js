@@ -4,8 +4,10 @@ const path = require("path");
 const questionSet = require("./client/src/questionSet.json");
 var mongoose = require('mongoose');
 const router = express.Router();
+require('./config/config');
 
 const app = express();
+app.use(express.json());
 
 app.use((req, res, next) => {
     console.log("request details. Method", req.method, "original url:", req.originalUrl);
@@ -31,14 +33,14 @@ app.get("/questionset", (req, res) => {
     res.json(questionSet);
 });
 
-
+/*
 // handle errors middleware
 app.use((err, req, res, next) => {
     console.log("err", err);
 
     res.status(500).json({ type: "error", message: err.message });
 });
-
+*/
 
 const PORT = process.env.PORT || 3000;
 

@@ -68,6 +68,7 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+/*
 // Handles the CORS error
 router.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -93,6 +94,6 @@ router.get("/find/:email", function (req, res) {
     res.json(users);
   });
 })
-
+*/
 
 module.exports = router;

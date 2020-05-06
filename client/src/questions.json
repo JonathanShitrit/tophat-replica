@@ -27,3 +27,75 @@
         "TextboxAnswer": "George Washington"
     }
 ]
+
+/*
+Hi, this is what I had in mind for Questions.
+*/
+
+{
+    "QuestionId": "121212",
+    "QuestionNumber": "Q1",
+    "QuestionType": "MULTIPLE",
+    "QuestionText": "Who was NOT the first president of USA?",
+    "Points": 2,
+    "Choices": [
+        {
+            "Choice": "Abraham Lincoln",
+            "IsAnswer": "True"
+        },
+        {
+            "Choice": "George Washington",
+            "IsAnswer": "False"
+        },
+        {
+            "Choice": "John F. Kennedy",
+            "IsAnswer": "True"
+        }
+    ],
+    "TextboxAnswer": ""
+}
+
+{
+    "QuestionId": "232323",
+    "QuestionNumber": "Q2",
+    "QuestionType": "TEXTBOX",
+    "QuestionText": "Who was the first president of USA?",
+    "Choices": [],
+    "TextboxAnswer": "George Washington"
+}
+
+//SO when you want to find all the questions saved in the database, you can do a findAll query.
+
+//On react it'll be a big json object.
+{
+{
+    "QuestionId": "121212",
+    "QuestionNumber": "Q1",
+    "QuestionType": "MULTIPLE",
+    "QuestionText": "Who was NOT the first president of USA?",
+    "Points": 2,
+    "Choices": [
+        {
+            "Choice": "Abraham Lincoln",
+            "IsAnswer": "True"
+        },
+        {
+            "Choice": "George Washington",
+            "IsAnswer": "False"
+        },
+        {
+            "Choice": "John F. Kennedy",
+            "IsAnswer": "True"
+        }
+    ],
+    "TextboxAnswer": ""
+},
+{
+    "QuestionId": "232323",
+    "QuestionNumber": "Q2",
+    "QuestionType": "TEXTBOX",
+    "QuestionText": "Who was the first president of USA?",
+    "Choices": [],
+    "TextboxAnswer": "George Washington"
+}
+}

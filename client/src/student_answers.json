@@ -30,3 +30,33 @@
         ]
     }
 }
+
+//This is what I had in mind
+
+{
+  "Student_Answers_id": 1000,
+  "username": req.body.username,
+  "Results": [
+    {
+      "QuestionId": 121212,
+       //"QuestionSet": "Review set 2",
+      "DidAnswerCorrectly": "True",
+      //"QuestionType": "MULTIPLE",
+      "PointValue": 2,
+      "PickedAnswers": [
+          "ChoiceNumber": 1,
+          "ChoiceNumber": 3
+      ],
+      "TexboxAnswer": ""
+    },
+    {
+      "QuestionId": 2,
+       //"QuestionSet": "Review set 1",
+      "DidAnswerCorrectly": "True",
+      //"QuestionType": "TEXTBOX",
+      "PointValue": 2,
+      "PickedAnswers": [],
+      "TexboxAnswer": "George Washington"
+    }
+  "Score": //sum up points in array and store here. 
+}

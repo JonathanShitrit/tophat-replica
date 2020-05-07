@@ -9,6 +9,7 @@ const User = require('../../models/Users');
 //Successfully registers new user to DB and checks if existing user.
 
 router.post('/register', async (req, res, next) => {
+  console.log(req.body);
   try {
     let user = await User.find({ username: req.body.username }).exec();
 
@@ -29,7 +30,7 @@ router.post('/register', async (req, res, next) => {
 
     let result = await user.save();
     console.log(result);
-    return res.status(400).json({
+    return res.status(201).json({
       message: 'Successful'
     });
   } catch (err) {
@@ -43,14 +44,14 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
   console.log(req.body);
   try {
-    let user = await User.find({ username: req.body.username , usertype: req.body.usertype, password: req.body.password }).exec();
+    let user = await User.find({ username: req.body.username, password: req.body.password }).exec();
     console.log(user);
     if (user.length < 1) {
       return res.status(404).json({
         message: 'Auth failed'
       });
     }
-    let result = await User.find({ username: req.body.username, usertype: req.body.usertype, password: req.body.password }).exec();
+    let result = await User.find({ username: req.body.username, password: req.body.password }).exec();
 
     if (result) {
       res.status(200).json('Logged in successfully');
@@ -67,6 +68,8 @@ router.post('/login', async (req, res, next) => {
     });
   }
 });
+
+
 
 /*
 // Handles the CORS error

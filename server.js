@@ -33,14 +33,14 @@ app.get("/questionset", (req, res) => {
     res.json(questionSet);
 });
 
-/*
+
 // handle errors middleware
 app.use((err, req, res, next) => {
     console.log("err", err);
 
     res.status(500).json({ type: "error", message: err.message });
 });
-*/
+
 
 const PORT = process.env.PORT || 3000;
 

@@ -9,7 +9,7 @@ const studentResults = new Schema({
 
 const studentAnswersSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  username: { type: String, required: true },
+  email: { type: String, required: true },
   questionSet: { type: Schema.ObjectId, ref: 'QuestionSet' },
   results: [studentResults],
   textboxAnswer: { type: String },

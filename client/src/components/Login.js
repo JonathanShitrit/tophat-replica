@@ -73,7 +73,7 @@ class Login extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <label>What typ of user are you?</label>
+                                    <label>What type of user are you?</label>
                                     <div className="custom-control custom-checkbox">
                                         <input type="radio" id="instructor" style={{ margin: 2 }} name="user-type" value="instructor" />
                                         <label htmlFor="instructor" style={{ margin: 2, marginRight: 10 }}>Instructor</label>

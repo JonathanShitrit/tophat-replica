@@ -11,8 +11,8 @@ class App extends Component {
   render() {
     return (
 
-      // <Login />
-      <Instructor />
+      <Login />
+      // <Instructor />
 
     );
   }

@@ -17,14 +17,6 @@ const Warning = () => (
 class Login extends Component {
     state = { isSigninVisible: false, showWarning: false, user: {}, name: "", email: "", username: "", usertype: "", password: "" };
 
-    // {
-    //     "name": "jonathan",
-    //     "email": "jon@gmail.com",
-    //     "username": "Jons",
-    //     "usertype": "student",
-    //     "password": "1234"
-    // }
-
     clearState = () => {
         this.setState({ name: "" });
         this.setState({ email: "" });
@@ -33,7 +25,6 @@ class Login extends Component {
         this.setState({ password: "" });
         document.getElementsByClassName("my-form")[0].reset();
     }
-
 
     toggelSignin = () => {
         this.setState({ isSigninVisible: !this.state.isSigninVisible });

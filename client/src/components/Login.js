@@ -10,10 +10,6 @@ const Warning = () => (
     </div>
 )
 
-// const initialState = {
-//     showWarning: false, user: {}, : "", : "", : "", : ""
-// }
-
 class Login extends Component {
     state = { isSigninVisible: false, showWarning: false, user: {}, name: "", email: "", username: "", usertype: "", password: "" };
 

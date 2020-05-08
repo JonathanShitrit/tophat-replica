@@ -61,7 +61,7 @@ class Login extends Component {
         //     });
 
 
-        axios.post(`${document.location.origin}/api/users/login`, {
+        axios.post(`${document.location.origin}/api/users/register`, {
             name: this.state.name,
             email: this.state.email,
             username: this.state.username,
@@ -73,7 +73,7 @@ class Login extends Component {
             }
         }).then(response => {
             console.log(response);
-            this.props.appCallback(response, this.state.username);
+            this.props.appCallback(response, response.data);
         }).catch(error => {
             console.log(error.response)
         });
@@ -91,7 +91,7 @@ class Login extends Component {
             }
         }).then(response => {
             console.log(response)
-            this.props.appCallback(response, this.state.username);
+            this.props.appCallback(response, response.data);
         }).catch(error => {
             console.log(error.response)
         });

@@ -9,7 +9,6 @@ const User = require('../../models/Users');
 //Successfully registers new user to DB and checks if existing user.
 
 router.post('/register', async (req, res, next) => {
-  console.log(req.body);
   try {
     let user = await User.find({ username: req.body.username }).exec();
 
@@ -29,10 +28,9 @@ router.post('/register', async (req, res, next) => {
     });
 
     let result = await user.save();
-    console.log(result);
-    return res.status(201).json({
-      message: 'Successful'
-    });
+    console.log("result:", result);
+    return res.status(201).send(result);
+
   } catch (err) {
     return res.status(500).json({
       error: err
@@ -51,10 +49,10 @@ router.post('/login', async (req, res, next) => {
         message: 'Auth failed'
       });
     }
-    let result = await User.find({ username: req.body.username, password: req.body.password }).exec();
+    let result = await User.findOne({ username: req.body.username, password: req.body.password }).exec();
 
     if (result) {
-      res.status(200).json('Logged in successfully');
+      res.status(200).send(result);
     }
     else {
       return res.status(404).json({

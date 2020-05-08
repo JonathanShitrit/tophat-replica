@@ -10,6 +10,10 @@ const Warning = () => (
     </div>
 )
 
+// const initialState = {
+//     showWarning: false, user: {}, : "", : "", : "", : ""
+// }
+
 class Login extends Component {
     state = { isSigninVisible: false, showWarning: false, user: {}, name: "", email: "", username: "", usertype: "", password: "" };
 
@@ -21,9 +25,21 @@ class Login extends Component {
     //     "password": "1234"
     // }
 
+    clearState = () => {
+        this.setState({ name: "" });
+        this.setState({ email: "" });
+        this.setState({ username: "" });
+        this.setState({ usertype: "" });
+        this.setState({ password: "" });
+        document.getElementsByClassName("my-form")[0].reset();
+    }
+
+
     toggelSignin = () => {
         this.setState({ isSigninVisible: !this.state.isSigninVisible });
+        this.clearState();
     };
+
 
     toggelWarning = () => {
         this.setState({ showWarning: !this.state.showWarning });
@@ -32,7 +48,6 @@ class Login extends Component {
     changeHandler = (e) => {
         // const field = e.target.name;
         this.setState({ [e.target.name]: e.target.value });
-        console.log([e.target.name], e.target.value);
     }
 
     onSignup = event => {
@@ -105,7 +120,7 @@ class Login extends Component {
 
                 {this.state.isSigninVisible ? (
                     <div className="auth-signin">
-                        <form onSubmit={this.onLogin}>
+                        <form className="my-form" onSubmit={this.onLogin}>
                             <h2>Sign in</h2>
 
                             <div className="form-group">
@@ -129,8 +144,9 @@ class Login extends Component {
                         </form>
                     </div>
                 ) : (
+
                         <div className="auth-signup">
-                            <form onSubmit={this.onSignup}>
+                            <form className="my-form" onSubmit={this.onSignup}>
                                 <h2>Sign up</h2>
 
                                 <div className="form-group">

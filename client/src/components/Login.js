@@ -61,7 +61,7 @@ class Login extends Component {
         //     });
 
 
-        axios.post('/api/users/register', {
+        axios.post(`${document.location.origin}/api/users/login`, {
             name: this.state.name,
             email: this.state.email,
             username: this.state.username,
@@ -72,7 +72,8 @@ class Login extends Component {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
         }).then(response => {
-            console.log(response)
+            console.log(response);
+            this.props.appCallback(response, this.state.username);
         }).catch(error => {
             console.log(error.response)
         });
@@ -81,7 +82,7 @@ class Login extends Component {
     onLogin = event => {
         event.preventDefault();
 
-        axios.post('/api/users/login', {
+        axios.post(`${document.location.origin}/api/users/login`, {
             username: this.state.username,
             password: this.state.password
         }, {
@@ -90,6 +91,7 @@ class Login extends Component {
             }
         }).then(response => {
             console.log(response)
+            this.props.appCallback(response, this.state.username);
         }).catch(error => {
             console.log(error.response)
         });

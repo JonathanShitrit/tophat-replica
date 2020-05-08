@@ -95,7 +95,7 @@ class Instructor extends Component {
 
     componentDidMount() {
 
-        fetch("/questionset")
+        fetch(`${document.location.origin}/questionset`)
             .then(response => response.json())
             .then(json => this.setState({ questionSets: json }))
             .catch(err => alert(err.message));

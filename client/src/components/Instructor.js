@@ -8,42 +8,42 @@ const MultipleChoice = (props) => (
     <div>
         <div className="form-group">
             <label>Choice 1</label>
-            <input type="text" onChange={props.changeHandler} className="form-control" placeholder="Enter value" name="Choice" />
+            <input type="text" onChange={props.changeHandler} className="form-control choice" placeholder="Enter value" name="Choice" />
             <div className="is-answer">
                 <label htmlFor="1">Correct answer? </label>
-                <input type="checkbox" onChange={props.changeHandler} id="1" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
+                <input type="checkbox" onChange={props.changeHandler} id="1" className="isAnswerCheckbox" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
             </div>
         </div>
         <div className="form-group">
             <label>Choice 2</label>
-            <input type="text" onChange={props.changeHandler} className="form-control" placeholder="Enter value" name="Choice" />
+            <input type="text" onChange={props.changeHandler} className="form-control choice" placeholder="Enter value" name="Choice" />
             <div className="is-answer">
                 <label htmlFor="2">Correct answer? </label>
-                <input type="checkbox" onChange={props.changeHandler} id="2" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
+                <input type="checkbox" onChange={props.changeHandler} id="2" className="isAnswerCheckbox" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
             </div>
         </div>
         <div className="form-group">
             <label>Choice 3</label>
-            <input type="text" onChange={props.changeHandler} className="form-control" placeholder="Enter value" name="Choice" />
+            <input type="text" onChange={props.changeHandler} className="form-control choice" placeholder="Enter value" name="Choice" />
             <div className="is-answer">
                 <label htmlFor="3">Correct answer? </label>
-                <input type="checkbox" onChange={props.changeHandler} id="3" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
+                <input type="checkbox" onChange={props.changeHandler} id="3" className="isAnswerCheckbox" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
             </div>
         </div>
         <div className="form-group">
             <label>Choice 4</label>
-            <input type="text" onChange={props.changeHandler} className="form-control" placeholder="Enter value" name="Choice" />
+            <input type="text" onChange={props.changeHandler} className="form-control choice" placeholder="Enter value" name="Choice" />
             <div className="is-answer">
                 <label htmlFor="4">Correct answer? </label>
-                <input type="checkbox" onChange={props.changeHandler} id="4" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
+                <input type="checkbox" onChange={props.changeHandler} id="4" className="isAnswerCheckbox" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
             </div>
         </div>
         <div className="form-group">
             <label>Choice 5</label>
-            <input type="text" onChange={props.changeHandler} className="form-control" placeholder="Enter value" name="Choice" />
+            <input type="text" onChange={props.changeHandler} className="form-control choice" placeholder="Enter value" name="Choice" />
             <div className="is-answer">
                 <label htmlFor="5">Correct answer? </label>
-                <input type="checkbox" onChange={props.changeHandler} id="5" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
+                <input type="checkbox" onChange={props.changeHandler} id="5" className="isAnswerCheckbox" style={{ margin: "4px", verticalAlign: "middle" }} name="IsAnswer" />
             </div>
         </div>
     </div>
@@ -82,19 +82,17 @@ const Textbox = (props) => (
 
 class Instructor extends Component {
     state = {
-        questionSets: [], added: false, type: "", checked: [], question: {}, QuestionNumber: "",
+        questionSets: [], added: false, type: "",
+        QuestionNumber: "",
         QuestionType: "",
         QuestionText: "",
         Choices: [],
-        TextboxAnswer: "",
-        choice: "",
-        ans: null
+        TextboxAnswer: ""
     };
 
 
 
     componentDidMount() {
-
         fetch(`${document.location.origin}/questionset`)
             .then(response => response.json())
             .then(json => this.setState({ questionSets: json }))
@@ -112,40 +110,29 @@ class Instructor extends Component {
         console.log([e.target.name], e.target.value);
     }
 
-    isAnswerHandler = (e) => {
-        const myans = this.state.Choices;
-
-        if ([e.target.name] == "Choice") {
-            this.setState({ choice: e.target.value });
-        }
-        else {
-            if (e.target.value == "on")
-                this.setState({ ans: true });
-            else
-                this.setState({ ans: false });
-        }
-
-        if (this.state.choice != "" && this.state.ans != null) {
-            myans.push({ "Choice": this.state.choice, "IsAnswer": this.state.ans });
-            this.setState({ Choices: myans });
-            this.setState({ choice: "" });
-            this.setState({ ans: null });
-        }
-        // this.setState({ [e.target.name]: e.target.value });
-        console.log("myans", myans);
-    }
-
     onSubmit = (e) => {
-        this.setState({
-            question: {
-                "QuestionNumber": this.state.QuestionNumber,
-                "QuestionType": this.state.QuestionType,
-                "QuestionText": this.state.QuestionText,
-                "Choices": this.state.Choices,
-                "TextboxAnswer": this.state.TextboxAnswer
-            }
-        });
-        console.log(this.state.question);
+        var x = document.getElementsByClassName("isAnswerCheckbox");
+        var z = document.getElementsByClassName("choice");
+        const a = [];
+        for (var i = 0; i < x.length; i++) {
+            a[i] = {};
+            a[i].IsAnswer = x[i].checked;
+            a[i].Choice = z[i].value;
+        }
+
+
+        this.setState({ Choices: [...a] },
+            () => {
+                for (var i = 0; i < this.state.Choices.length; i++) {
+                    console.log(this.state.Choices[i]);
+                }
+            });
+
+        console.log(this.state.QuestionNumber);
+        console.log(this.state.QuestionType);
+        console.log(this.state.QuestionText);
+        console.log(this.state.TextboxAnswer);
+
     }
 
 
@@ -204,7 +191,7 @@ class Instructor extends Component {
 
                                     {(() => {
                                         switch (this.state.QuestionType) {
-                                            case "MULTIPLE": return <MultipleChoice changeHandler={this.isAnswerHandler} />;
+                                            case "MULTIPLE": return <MultipleChoice />;
                                             case "TEXTBOX": return <Textbox changeHandler={this.changeHandler} />;
                                             default: return;
                                         }

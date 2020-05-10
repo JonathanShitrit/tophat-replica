@@ -29,7 +29,7 @@ router.post('/register', async (req, res, next) => {
 
     let result = await user.save();
     console.log(result);
-    return res.status(400).json({
+    return res.status(201).json({
       message: 'Successful'
     });
   } catch (err) {

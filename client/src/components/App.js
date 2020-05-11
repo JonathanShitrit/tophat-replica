@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Login';
 import Instructor from './Instructor';
+import Header from './Header';
 
 class App extends Component {
   // use fetch(`${document.location.origin}/)
@@ -38,10 +39,10 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ width: "100%" }}>
         {this.isAuthenticated() ? (
           this.isInstructor() ? (
-            <Instructor />
+            <Header><Instructor /></Header>
           ) : (
               console.log("navigate to student page")
               // <Login appCallback={this.authCallback} />

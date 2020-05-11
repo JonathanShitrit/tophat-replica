@@ -105,9 +105,6 @@ router.post('/register', async (req, res, next) => {
 
       })
 
-
-
-
     })
   }
   catch (err) {

@@ -26,33 +26,33 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
-#sidebar.active {
+.sidebar.active {
     margin-left: -250px;
 }
 
-#sidebar {
+.sidebar {
     /* min-width: 250px; */
-    min-height: 100vh;
+    min-height: 99%;
     background: #fff;
     color: #000;
     transition: all 0.3s;
     border-right: 1px solid lightslategrey;
 }
 
-#sidebar .sidebar-header {
+.sidebar h2 {
     padding: 16px;
     /* background: #6d7fcc; */
     /* background: #0089da; */
     background: #fff;
 }
 
-#sidebar ul.components {
+.sidebar ul {
     padding: 20px;
     border-bottom: 1px solid #000;
     text-align: center;
 }
 
-#sidebar ul p {
+.sidebar ul p {
     color: #000;
 }
 
@@ -61,12 +61,12 @@ ul li a {
     font-size: 1.1em;
     display: block;
 }
-#sidebar ul li a:hover {
+.sidebar ul li a:hover {
     color: #000;
     background: #ddd;
 }
 
-#sidebar ul li.active {
+.sidebar ul li.active {
     color: #000;
     /* background: #0089da; */
     background: #fff;
@@ -79,11 +79,8 @@ ul ul a {
 
 
 .content {
-    width: 100%;
-    /* min-height: 100vh; */
-}
-.new-question {
     padding: 20px;
+    /* min-height: 100vh; */
 }
 
 .is-answer {
@@ -94,9 +91,25 @@ ul ul a {
 .form-group {
     margin-bottom: 2rem;
 }
-/* .my-sidebar {
-    min-width: 250px;
-    min-height: 100vh;
-    background: #46C3FF;
-    padding: 10px;
+
+.my-form {
+    width: 65%;
+    margin: 0 auto;
+}
+
+/* .navbar {
+    position: relative;
 } */
+
+.brand {
+    color: aliceblue;
+    position: absolute;
+    left: 10px;
+}
+
+.logout {
+    color: aliceblue;
+    position: absolute;
+    right: 10px;
+}
+

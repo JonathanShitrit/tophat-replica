@@ -4,18 +4,11 @@ import { Link } from "react-router-dom";
 const Header = ({ children }) => {
     // Makes the Header a Higher-order component
 
-    const style = {
-        display: "inline-block",
-        margin: 10,
-        marginBottom: 30
-    }
-
     return (
         <div>
-            <nav class="navbar navbar-expand-sm bg-light justify-content-center">
-                {/* <h3 style={style}><Link to="/">Home</Link></h3>
-                <h3 style={style}><Link to="/sign-in">Sign in</Link></h3>
-                <h3 style={style}><Link to="/sign-up">Sign up</Link></h3> */}
+            <nav className="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" style={{ borderRadius: "unset", height: "62px" }}>
+                <a className="brand" href="/"><h2>Indelible Interactive</h2></a>
+                <a className="logout" href="#">Logout</a>
             </nav>
             {children}
         </div>

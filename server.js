@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, "client/dist")));
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // GET METHODS
@@ -52,5 +53,6 @@ mongoose.connect(
     });
 
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/questions', require('./routes/api/questions'));
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));

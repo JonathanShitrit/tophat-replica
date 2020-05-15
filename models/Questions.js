@@ -7,9 +7,8 @@ const questionsSchema = mongoose.Schema({
   questionType: { type: String, required: true, trim: true },
   questionText: { type: String, required: true, trim: true },
   points: { type: Number, required: true },
-  choices: [mongoose.Schema.Types.Mixed],
-  textBoxAnswer: { type: String, trim: true }
-
+  textboxAnswer: { type: String, trim: true },
+  choices: [mongoose.Schema.Types.Mixed]
 });
 
 module.exports = mongoose.model('Questions', questionsSchema);

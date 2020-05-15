@@ -1,33 +1,33 @@
 import React, { Component } from "react";
 import "../instructor.css";
 import "../index.css";
-import "../questionSet.json";
-import "../questions.json";
-import GetStarted from "./GetStarted";
+import CreateSet from "./CreateSet";
 import CreateQuestion from "./CreateQuestion";
+import axios from "axios";
 
 
 class Instructor extends Component {
     state = {
         questionSets: [], added: false, type: "",
         QuestionTitle: "",
+        Points: 0,
         QuestionType: "",
         QuestionText: "",
         Choices: [],
         TextboxAnswer: "",
-        getStarted: true
+        toggleCreateSet: true
     };
 
 
 
     componentDidMount() {
-        fetch(`${document.location.origin}/questionset`)
+        fetch(`${document.location.origin}/api/questions/questionset`)
             .then(response => response.json())
             .then(json => {
                 console.log(json);
                 if (json.length > 0) {
                     // Not initial setup
-                    this.setState({ getStarted: false });
+                    this.setState({ toggleCreateSet: false });
                 }
                 this.setState({ questionSets: json });
             })
@@ -62,22 +62,41 @@ class Instructor extends Component {
                 console.log(this.state.QuestionTitle);
                 console.log(this.state.QuestionType);
                 console.log(this.state.QuestionText);
+                console.log(this.state.Points);
                 console.log(this.state.Choices[0]);
                 console.log(this.state.Choices[1]);
                 console.log(this.state.Choices[2]);
                 console.log(this.state.Choices[3]);
                 console.log(this.state.Choices[4]);
                 console.log(this.state.TextboxAnswer);
+
+                this.postQuestionToDB();
             });
 
     }
 
+    postQuestionToDB = () => {
+        axios.post(`${document.location.origin}/api/questions/questionstophat`, {
+            questionTitle: this.state.QuestionTitle,
+            questionType: this.state.QuestionType,
+            questionText: this.state.QuestionText,
+            points: this.state.Points,
+            choices: [...this.state.Choices],
+            textboxAnswer: this.state.TextboxAnswer
+        }, {
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error.response)
+        });
+    }
+
 
     createSet = () => {
-        this.setState({ getStarted: true });
-        // const myobj = this.state.questionSets;
-        // myobj.push({ "name": "", "questions": [] });
-        // this.setState({ questionSets: myobj });
+        this.setState({ toggleCreateSet: !this.state.toggleCreateSet });
     }
 
     render() {
@@ -93,15 +112,15 @@ class Instructor extends Component {
                             <li><button style={{ marginBottom: "6px" }} onClick={this.createSet}>Create a new set &#10010;</button></li>
                             {this.state.questionSets.map(item => {
                                 return (
-                                    <li key={item.name}><a>{item.name}</a></li>
+                                    <li key={item.questionSetName}><a>{item.questionSetName}</a></li>
                                 )
                             })}
 
                         </ul>
                     </nav>
                     <div className="col-10" style={{ marginLeft: "16.6%" }}>
-                        {this.state.getStarted ? (
-                            <GetStarted />
+                        {this.state.toggleCreateSet ? (
+                            <CreateSet />
                         ) : (
                                 <CreateQuestion
                                     added={this.state.added}

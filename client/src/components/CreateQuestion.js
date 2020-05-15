@@ -7,7 +7,7 @@ class CreateQuestion extends Component {
         return (
             <div className="content">
                 {this.props.added ? (
-                    <form onSubmit={this.props.onSubmit} className="my-form" >
+                    <form onSubmit={this.props.onSubmit} className="instructor-form" >
                         <h2>New Question</h2>
 
                         <div className="form-group">
@@ -18,6 +18,11 @@ class CreateQuestion extends Component {
                         <div className="form-group">
                             <label>Question</label>
                             <input type="text" onChange={this.props.changeHandler} className="form-control" placeholder="Enter question" name="QuestionText" required />
+                        </div>
+
+                        <div className="form-group">
+                            <label>Point value</label>
+                            <input type="number" onChange={this.props.changeHandler} className="form-control" min="1" name="Points" required />
                         </div>
 
                         <div className="form-group">

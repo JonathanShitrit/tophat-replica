@@ -93,7 +93,12 @@ ul ul a {
 }
 
 .my-form {
-    width: 65%;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.instructor-form {
+    width: 75%;
     margin: 0 auto;
 }
 
@@ -102,14 +107,23 @@ ul ul a {
 } */
 
 .brand {
-    color: aliceblue;
+    color: #eee;
     position: absolute;
     left: 10px;
 }
 
+.brand:hover {
+    color: #aaa;
+}
+
 .logout {
-    color: aliceblue;
+    color: #eee;
     position: absolute;
     right: 10px;
 }
+
+.logout:hover {
+    color: #aaa;
+}
+
 

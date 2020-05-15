@@ -1,7 +1,6 @@
 const express = require("express");
 const request = require("request");
 const path = require("path");
-const questionSet = require("./client/src/questionSet.json");
 var mongoose = require('mongoose');
 const router = express.Router();
 require('./config/config');
@@ -30,9 +29,6 @@ app.get("/ping", (req, res) => {
     res.send("pong!");
 });
 
-app.get("/questionset", (req, res) => {
-    res.json(questionSet);
-});
 
 
 // handle errors middleware
@@ -54,5 +50,7 @@ mongoose.connect(
 
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/questions', require('./routes/api/questions'));
+app.use('/api/questions', require('./routes/api/questionset'));
+
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));

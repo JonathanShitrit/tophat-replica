@@ -40,9 +40,11 @@ router.get('/questions', async (req, res) => {
         message: "Error loading questions"
       })
     }
-    return res.status(200).send(questions);;
+    return res.status(200).send(questions);
   });
 
 });
+
+
 
 module.exports = router;

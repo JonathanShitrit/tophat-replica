@@ -4,18 +4,22 @@ import "../index.css";
 import CreateSet from "./CreateSet";
 import CreateQuestion from "./CreateQuestion";
 import axios from "axios";
+import ShowQuestions from "./ShowQuestions";
+import ShowSet from "./ShowSet";
 
 
 class Instructor extends Component {
     state = {
-        questionSets: [], added: false, type: "",
+        questionSets: [],
+        type: "",
         QuestionTitle: "",
         Points: 0,
         QuestionType: "",
         QuestionText: "",
         Choices: [],
         TextboxAnswer: "",
-        toggleCreateSet: true
+        content: "",
+        questionSetName: ""
     };
 
 
@@ -27,16 +31,12 @@ class Instructor extends Component {
                 console.log(json);
                 if (json.length > 0) {
                     // Not initial setup
-                    this.setState({ toggleCreateSet: false });
+                    this.setState({ content: "ADDQUESTION" });
                 }
                 this.setState({ questionSets: json });
             })
             .catch(err => alert(err.message));
 
-    }
-
-    toggleAdd = () => {
-        this.setState({ added: !this.state.added });
     }
 
     changeHandler = (e) => {
@@ -81,8 +81,8 @@ class Instructor extends Component {
             questionType: this.state.QuestionType,
             questionText: this.state.QuestionText,
             points: this.state.Points,
-            choices: [...this.state.Choices],
-            textboxAnswer: this.state.TextboxAnswer
+            textboxAnswer: this.state.TextboxAnswer,
+            choices: [...this.state.Choices]
         }, {
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
@@ -95,8 +95,21 @@ class Instructor extends Component {
     }
 
 
-    createSet = () => {
-        this.setState({ toggleCreateSet: !this.state.toggleCreateSet });
+    addSet = () => {
+        this.setState({ content: "ADDSET" });
+    }
+
+    addQuestion = () => {
+        this.setState({ content: "ADDQUESTION" });
+    }
+
+    showSet = (setName) => {
+        this.setState({ content: "SHOWSET" });
+        this.setState({ questionSetName: setName });
+    }
+
+    showQuestions = () => {
+        this.setState({ content: "SHOWQUESTIONS" });
     }
 
     render() {
@@ -109,27 +122,40 @@ class Instructor extends Component {
 
                         <ul className="list-unstyled">
 
-                            <li><button style={{ marginBottom: "6px" }} onClick={this.createSet}>Create a new set &#10010;</button></li>
+                            <li><button style={{ marginBottom: "6px" }} onClick={this.addSet}>New set &#10010;</button></li>
+                            <li><button style={{ marginBottom: "6px" }} onClick={this.addQuestion}>New question &#10010;</button></li>
+                            <li><button style={{ marginBottom: "6px" }} onClick={this.showQuestions}>All questions</button></li>
+
                             {this.state.questionSets.map(item => {
                                 return (
-                                    <li key={item.questionSetName}><a>{item.questionSetName}</a></li>
+                                    <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
                                 )
                             })}
 
                         </ul>
                     </nav>
                     <div className="col-10" style={{ marginLeft: "16.6%" }}>
-                        {this.state.toggleCreateSet ? (
-                            <CreateSet />
-                        ) : (
-                                <CreateQuestion
-                                    added={this.state.added}
-                                    QuestionType={this.state.QuestionType}
-                                    toggleAdd={this.toggleAdd}
-                                    changeHandler={this.changeHandler}
-                                    onSubmit={this.onSubmit}
-                                />
-                            )}
+                        {(() => {
+                            switch (this.state.content) {
+                                case "ADDSET":
+                                    return <CreateSet />;
+
+                                case "ADDQUESTION":
+                                    return <CreateQuestion
+                                        QuestionType={this.state.QuestionType}
+                                        changeHandler={this.changeHandler}
+                                        onSubmit={this.onSubmit}
+                                    />;
+
+                                case "SHOWSET":
+                                    return <ShowSet
+                                        questionSetName={this.state.questionSetName} />;
+
+                                case "SHOWQUESTIONS":
+                                    return <ShowQuestions />;
+                                default: return;
+                            }
+                        })()}
 
                     </div>
                 </div>

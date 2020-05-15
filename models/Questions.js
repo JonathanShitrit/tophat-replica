@@ -8,7 +8,7 @@ const questionsSchema = mongoose.Schema({
   questionText: { type: String, required: true, trim: true },
   points: { type: Number, required: true },
   choices: [mongoose.Schema.Types.Mixed],
-  textBoxAnswer: { type: String }
+  textBoxAnswer: { type: String, trim: true }
 
 });
 

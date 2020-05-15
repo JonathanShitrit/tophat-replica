@@ -42,4 +42,22 @@ router.get('/questionset', async (req, res) => {
 
 });
 
+router.get('/questionset/:name', async (req, res) => {
+    // Gets the questions from mongodb for the set clicked
+    QuestionSet.find({ questionSetName: req.body.questionSetName }, function (err, set) {
+        if (err) {
+            return res.status(400).json({
+                message: "Error loading question"
+            })
+        }
+        return res.status(200).send(set);
+    });
+
+});
+
+router.param("name", function (req, res, next, name) {
+    req.body.questionSetName = name;
+    next();
+});
+
 module.exports = router;

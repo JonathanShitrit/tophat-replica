@@ -4,7 +4,7 @@ import "../index.css";
 import CreateSet from "./CreateSet";
 import CreateQuestion from "./CreateQuestion";
 import axios from "axios";
-import ShowQuestions from "./ShowQuestions";
+// import ShowQuestions from "./ShowQuestions";
 import ShowSet from "./ShowSet";
 
 
@@ -18,17 +18,34 @@ class Instructor extends Component {
         QuestionText: "",
         Choices: [],
         TextboxAnswer: "",
-        content: "",
-        questionSetName: ""
+        content: "ADDSET",
+        questionSetName: "",
+        allQuestions: []
     };
 
 
 
     componentDidMount() {
+        this.loadQuestionSets();
+        this.loadAllQuestions();
+
+    }
+
+    loadAllQuestions = () => {
+        fetch(`${document.location.origin}/api/questions/questions`)
+            .then(response => response.json())
+            .then(json => {
+                this.setState({ allQuestions: json })
+                console.log("questions", json);
+            })
+            .catch(err => alert(err.message));
+    }
+
+    loadQuestionSets = () => {
         fetch(`${document.location.origin}/api/questions/questionset`)
             .then(response => response.json())
             .then(json => {
-                console.log(json);
+                console.log("all sets", json);
                 if (json.length > 0) {
                     // Not initial setup
                     this.setState({ content: "ADDQUESTION" });
@@ -36,7 +53,6 @@ class Instructor extends Component {
                 this.setState({ questionSets: json });
             })
             .catch(err => alert(err.message));
-
     }
 
     changeHandler = (e) => {
@@ -89,6 +105,7 @@ class Instructor extends Component {
             }
         }).then(response => {
             console.log(response);
+            // window.alert("Successfully added question!");
         }).catch(error => {
             console.log(error.response)
         });
@@ -108,14 +125,14 @@ class Instructor extends Component {
         this.setState({ questionSetName: setName });
     }
 
-    showQuestions = () => {
-        this.setState({ content: "SHOWQUESTIONS" });
-    }
+    // showQuestions = () => {
+    //     this.setState({ content: "SHOWQUESTIONS" });
+    // }
 
     render() {
 
         return (
-            <div className="" style={{ marginTop: "62px", height: "90vh", overflowY: "auto", width: "100%" }}>
+            <div className="" style={{ paddingTop: "62px", width: "100%" }}>
                 <div className="row no-gutters">
                     <nav className="sidebar col-2" style={{ position: "fixed", left: "0", top: "0", zIndex: "5", paddingTop: "62px" }}>
                         <h2>Question Sets</h2>
@@ -124,11 +141,11 @@ class Instructor extends Component {
 
                             <li><button style={{ marginBottom: "6px" }} onClick={this.addSet}>New set &#10010;</button></li>
                             <li><button style={{ marginBottom: "6px" }} onClick={this.addQuestion}>New question &#10010;</button></li>
-                            <li><button style={{ marginBottom: "6px" }} onClick={this.showQuestions}>All questions</button></li>
+                            {/* <li><button style={{ marginBottom: "6px" }} onClick={this.showQuestions}>All questions</button></li> */}
 
                             {this.state.questionSets.map(item => {
                                 return (
-                                    <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
+                                    <li key={item.questionSetName}><a className="set-link" onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
                                 )
                             })}
 
@@ -138,7 +155,7 @@ class Instructor extends Component {
                         {(() => {
                             switch (this.state.content) {
                                 case "ADDSET":
-                                    return <CreateSet />;
+                                    return <CreateSet questions={this.state.allQuestions} />;
 
                                 case "ADDQUESTION":
                                     return <CreateQuestion
@@ -149,10 +166,11 @@ class Instructor extends Component {
 
                                 case "SHOWSET":
                                     return <ShowSet
+                                        key={this.state.questionSetName}
                                         questionSetName={this.state.questionSetName} />;
 
-                                case "SHOWQUESTIONS":
-                                    return <ShowQuestions />;
+                                // case "SHOWQUESTIONS":
+                                //     return <ShowQuestions />;
                                 default: return;
                             }
                         })()}

@@ -80,6 +80,7 @@ ul ul a {
 
 .content {
     padding: 20px;
+    padding-bottom: 35px;
     /* min-height: 100vh; */
 }
 
@@ -124,6 +125,10 @@ ul ul a {
 
 .logout:hover {
     color: #aaa;
+}
+
+.set-link {
+    cursor: pointer;
 }
 
 

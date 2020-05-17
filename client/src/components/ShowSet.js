@@ -43,13 +43,13 @@ class ShowSet extends Component {
                 .then(response => response.json())
                 .then(json => {
 
-                    var z = `<div class="col-sm-6" style='margin-bottom: 2%'>
+                    var z = `<div class="col-sm-4" style='margin-bottom: 2%'>
                         <div class="card border-dark">
                             <div class="card-header"><h2>${json.questionTitle}</h2></div>
                             <div class="card-body">
                                 <p class="card-text"> ${json.questionText}</p>
-                                <label key=${json._id} htmlFor=${json._id}>Add?</label>
-                                <input type="checkbox" value=${json._id} name=${json._id} key=${json._id} id=${json._id} class="questionsCheckbox" style='margin: "4px"; vertical-align: "middle"'/>
+                                <p class="card-text"> ${json.questionType}</p>
+                                <p class="card-text"> Worth ${json.points} points</p>
                             </div>
                         </div>
                     </div>`

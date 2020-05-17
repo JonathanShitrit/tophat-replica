@@ -1,0 +1,8 @@
+{
+    "development": {
+        "MONGODB_URI": "mongodb+srv://jonathanshitrit8:Jadarda22@cluster0-e9edm.mongodb.net/tophat?retryWrites=true&w=majority"
+    },
+    "production": {
+        "MONGODB_URI": "mongodb+srv://jonathanshitrit8:Jadarda22@cluster0-e9edm.mongodb.net/tophat?retryWrites=true&w=majority"
+    }
+}

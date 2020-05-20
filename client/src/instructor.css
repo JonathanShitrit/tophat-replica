@@ -117,6 +117,26 @@ ul ul a {
     color: #aaa;
 }
 
+.about {
+    color: #eee;
+    position: absolute;
+    right: 210px;
+}
+
+.about:hover {
+    color: #aaa;
+}
+
+.contact {
+    color: #eee;
+    position: absolute;
+    right: 110px;
+}
+
+.contact:hover {
+    color: #aaa;
+}
+
 .logout {
     color: #eee;
     position: absolute;

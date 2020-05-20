@@ -24,6 +24,7 @@
     "history": "^4.10.1",
     "live-server": "^1.2.1",
     "mongoose": "^5.9.12",
+    "parcel": "^1.12.4",
     "parcel-bundler": "^1.12.4",
     "react": "^16.6.3",
     "react-bootstrap": "^1.0.1",

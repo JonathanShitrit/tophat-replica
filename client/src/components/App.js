@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Login';
 import Instructor from './Instructor';
 import Header from './Header';
+import Student from './Student';
 
 class App extends Component {
   // use fetch(`${document.location.origin}/)
@@ -44,8 +45,9 @@ class App extends Component {
           this.isInstructor() ? (
             <Header><Instructor /></Header>
           ) : (
-              console.log("navigate to student page")
-              // <Login appCallback={this.authCallback} />
+            <Header><Student /></Header>
+            // console.log("navigate to student page")
+             // <Login appCallback={this.authCallback} />
             )
         ) : (
             <Login appCallback={this.authCallback} />

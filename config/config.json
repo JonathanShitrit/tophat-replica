@@ -1,8 +1,8 @@
 {
   "development": {
-    "MONGODB_URI": "mongodb+srv://kmuni:IloveMongo22@cluster0-b6zhq.mongodb.net/tophat?retryWrites=true&w=majority"
+    "MONGODB_URI": "mongodb+srv://jonathanshitrit8:Jadarda22@cluster0-e9edm.mongodb.net/hotelreservation?retryWrites=true&w=majority"
   },
   "production": {
-    "MONGODB_URI": "mongodb+srv://kmuni:IloveMongo22@cluster0-b6zhq.mongodb.net/tophat?retryWrites=true&w=majority"
+    "MONGODB_URI": "mongodb+srv://jonathanshitrit8:Jadarda22@cluster0-e9edm.mongodb.net/hotelreservation?retryWrites=true&w=majority"
   }
 }

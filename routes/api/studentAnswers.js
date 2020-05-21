@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 //import QuestionsSet model.
 
-const QuestionSet = require('../../models/StudentAnswers');
+const StudentAnswers = require('../../models/StudentAnswers');
 
 
 router.post('/studentanswers', async (req, res, next) => {

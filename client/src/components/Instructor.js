@@ -184,8 +184,8 @@ class Instructor extends Component {
                     <h2 className="w3-bar-item">Menu</h2>
 
 
-                    <button class="w3-bar-item w3-button w3-border-bottom" onClick={this.addSet}>New set &#10010;</button>
-                    <button class="w3-bar-item w3-button w3-border-bottom" onClick={this.addQuestion}>New question &#10010;</button>
+                    <a class="w3-bar-item w3-button w3-border-bottom" onClick={this.addSet}>New set &#10010;</a>
+                    <a class="w3-bar-item w3-button w3-border-bottom" onClick={this.addQuestion}>New question &#10010;</a>
 
                     {this.state.questionSets.map(item => {
                         return (

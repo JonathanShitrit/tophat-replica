@@ -179,8 +179,8 @@ class Instructor extends Component {
             //     </div>
             // </div >
 
-            <div style={{ maxHeight: "90%" }}>
-                <div className="w3-sidebar w3-light-grey w3-bar-block w3-card">
+            <div>
+                <div className="w3-sidebar w3-light-grey w3-bar-block w3-card" style={{ maxHeight: "90%" }}>
                     <h2 className="w3-bar-item">Menu</h2>
 
 

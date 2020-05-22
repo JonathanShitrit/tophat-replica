@@ -6,11 +6,11 @@ import InnerHTML from 'dangerously-set-html-content'
 
 class ShowClasswork extends Component {
 
-    state = { 
-        questions: [], 
-        questionsIds: [], 
+    state = {
+        questions: [],
+        questionsIds: [],
         questionSetName: "",
-        
+
         score: 0,
         pointTotal: 0,
 
@@ -34,13 +34,13 @@ class ShowClasswork extends Component {
 
     setAnswer = (answer) => {
         this.setState({
-            multiChoiceAnswer : this.state.answer
+            multiChoiceAnswer: this.state.answer
         })
     }
 
     toggleDisplayQuestion = () => {
         this.setState({ displayQuestion: !this.state.displayQuestion });
-     }
+    }
 
     componentDidMount() {
         // Get question set
@@ -78,19 +78,19 @@ class ShowClasswork extends Component {
     getSetsQuestions = (ids) => {
         var x = document.getElementById("list-questions");
         x.innerHTML = "";
-        
-        
+
+
         // Loop over this set's questions array and fetch each question's data
         ids.map(id => {
             fetch(`${document.location.origin}/api/questions/questions/${id}`)
                 .then(response => response.json())
                 .then(json => {
-                     
+
                     var z = "";
 
                     if (json.questionType == "MULTIPLE") {
                         z += `
-                        <div class="col-sm-4" style='margin-bottom: 2%'>
+                        <div class="col-sm-10" style="padding:20px 55px 25px">
                                 <div class="card border-dark">
                                     
                                     <form onSubmit={this.submitHandler} className="instructor-form">
@@ -125,7 +125,7 @@ class ShowClasswork extends Component {
                         </div>`
                     }
                     else {
-                        z += `<div class="col-sm-4" style='margin-bottom: 2%'>
+                        z += `<div class="col-sm-10" style="padding:20px 55px 25px">
                         <div class="card border-dark">
                                 <form onSubmit={this.submitHandler} className="instructor-form">
                                 <div class="card-header"><h2>${json.questionTitle}</h2></div>
@@ -143,26 +143,26 @@ class ShowClasswork extends Component {
 
                     </div>`
                     }
-                    
+
                     // Dynamically add the question card
                     x.innerHTML += z;
-  
+
                 })
                 .catch(err => alert(err.message));
         })
-        
+
     }
 
     render() {
 
         return (
-            
-            <div>
+
+            <div className="content" style={{ margin: "0 auto" }}>
                 <h2>{this.props.questionSetName}</h2>
                 <div id="list-questions"> <h4>Loading questions...</h4></div>
-                                        
-            </div>   
-        
+
+            </div>
+
         )
     }
 

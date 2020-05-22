@@ -201,8 +201,8 @@ class Student extends Component {
             //     </div>
             // </div >
 
-            <div style={{ maxHeight: "90%" }}>
-                <div className="w3-sidebar w3-light-grey w3-bar-block w3-card">
+            <div style={{ height: "100%" }}>
+                <div className="w3-sidebar w3-light-grey w3-bar-block w3-card" style={{ maxHeight: "90%" }}>
                     <h2 className="w3-bar-item">Dashboard</h2>
 
                     <a class="w3-bar-item w3-button w3-border-bottom" onClick={() => this.showStream}>Stream</a>
@@ -232,15 +232,15 @@ class Student extends Component {
                 </div>
 
 
-                <div className="main">
+                <div className="main" style={{ height: "100%" }}>
 
                     {(() => {
                         switch (this.state.content) {
 
                             case "SHOWSTREAM":
                                 return (
-                                    <div className="col-10" style={{ marginLeft: "16.6%" }}>
-                                        <p>Hello.........</p>
+                                    <div className="content" style={{ height: "100%" }}>
+                                        <p>Loading Questions...</p>
                                         {this.state.questionSets.map(item => {
 
                                             <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>

@@ -125,8 +125,9 @@ body, html, .App, #root, .auth-wrapper {
 }
 
 .top-nav h3:hover {
-  color: #46c3ff;
-  /* 70ff97  */
+  /* color: #46c3ff; */
+  color: #70ff97;
+
 }
 
 

@@ -38,9 +38,6 @@ class Signup extends Component {
                         <input type="password" onChange={this.props.changeHandler} name="password" className="form-control" placeholder="Enter password" />
                     </div>
 
-
-
-
                     <button type="submit" className="btn btn-primary btn-block btn-lg">Sign up</button>
 
                 </form>

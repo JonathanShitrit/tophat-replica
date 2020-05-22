@@ -57,7 +57,7 @@ class Student extends Component {
         this.setState({ [e.target.name]: e.target.value });
         console.log([e.target.name], e.target.value);
     }
-    
+
     onSubmit = (e) => {
         var x = document.getElementsByClassName("isAnswerCheckbox");
         var z = document.getElementsByClassName("choice");
@@ -107,7 +107,7 @@ class Student extends Component {
             console.log(error.response)
         });
     }
-    
+
     showSet = (setName) => {
         this.setState({ content: "SHOWSET" });
         this.setState({ questionSetName: setName });
@@ -119,87 +119,153 @@ class Student extends Component {
 
     toggleDisplayClassworkType = () => {
         this.setState({ displayClassworkType: !this.state.displayClassworkType });
-     }
+    }
 
     render() {
 
         return (
-            <div className="" style={{ paddingTop: "62px", width: "100%" }}>
-                <div className="row no-gutters">
-                    <nav className="sidebar col-2" style={{ position: "fixed", left: "0", top: "0", zIndex: "5", paddingTop: "62px" }}>
-                        <h2>Dashboard</h2>
+            // <div className="" style={{ paddingTop: "62px", width: "100%" }}>
+            //     <div className="row no-gutters">
+            //         <nav className="sidebar col-2" style={{ position: "fixed", left: "0", top: "0", zIndex: "5", paddingTop: "62px" }}>
+            //             <h2>Dashboard</h2>
 
-                        <ul className="list-unstyled">
-                            <li><button style={{ marginBottom: "6px" }} onClick={() => this.showStream}>Stream</button></li>
-                            <li><button style={{ marginBottom: "6px" }} >To Do</button></li>
-                            {
-                            this.state.displayClassworkType ? ( 
-                                <div> 
-                                    <li><button style={{ marginBottom: "6px" }} onClick={this.toggleDisplayClassworkType}>Classwork</button></li>
-                                    {/*<li><button style={{ marginBottom: "6px" }} onClick={this.showSet}>All Classwork</button></li> */}
-                                    {this.state.questionSets.map(item => {
-                                        return (
-                                            <li key={item.questionSetName}><a className="set-link" onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
-                                        )
-                                     })}
-                                    <li><button style={{ marginBottom: "6px" }}>Assignments</button></li>
-                                    <li><button style={{ marginBottom: "6px" }}>Exams</button></li>
-                                </div>
-                                ) : (
-                                <div>
-                                    <li><button style={{ marginBottom: "6px" }} onClick={this.toggleDisplayClassworkType}>Classwork</button></li>
-                                </div>
-                                
-                                )
-                             }   
-                            <li><button style={{ marginBottom: "6px" }} >Gradebook</button></li>
+            //             <ul className="list-unstyled">
+            //                 <li><button style={{ marginBottom: "6px" }} onClick={() => this.showStream}>Stream</button></li>
+            //                 <li><button style={{ marginBottom: "6px" }} >To Do</button></li>
+            //                 {
+            //                 this.state.displayClassworkType ? ( 
+            //                     <div> 
+            //                         <li><button style={{ marginBottom: "6px" }} onClick={this.toggleDisplayClassworkType}>Classwork</button></li>
+            //                         {/*<li><button style={{ marginBottom: "6px" }} onClick={this.showSet}>All Classwork</button></li> */}
+            //                         {this.state.questionSets.map(item => {
+            //                             return (
+            //                                 <li key={item.questionSetName}><a className="set-link" onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
+            //                             )
+            //                          })}
+            //                         <li><button style={{ marginBottom: "6px" }}>Assignments</button></li>
+            //                         <li><button style={{ marginBottom: "6px" }}>Exams</button></li>
+            //                     </div>
+            //                     ) : (
+            //                     <div>
+            //                         <li><button style={{ marginBottom: "6px" }} onClick={this.toggleDisplayClassworkType}>Classwork</button></li>
+            //                     </div>
 
-                        </ul>
-                    </nav>
+            //                     )
+            //                  }   
+            //                 <li><button style={{ marginBottom: "6px" }} >Gradebook</button></li>
+
+            //             </ul>
+            //         </nav>
 
 
-                    {/* <div className="col-10" style={{ marginLeft: "16.6%" }}>
-                        {this.state.questionSets.map(item => {
+            //         {/* <div className="col-10" style={{ marginLeft: "16.6%" }}>
+            //             {this.state.questionSets.map(item => {
+            //                         return (
+            //                             <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
+
+            //                         )
+            //                     })}
+            //         </div> */}
+
+            //         <div className="col-10" style={{ marginLeft: "16.6%" }}>
+
+            //             {(() => {
+            //                 switch (this.state.content) {
+
+            //                     case "SHOWSTREAM":
+            //                         return 
+            //                             <div className="col-10" style={{ marginLeft: "16.6%" }}>
+            //                                 <p>Hello.........</p>
+            //                                 {this.state.questionSets.map(item => {
+
+            //                                         <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
+
+
+            //                                  })}
+            //                             </div>
+
+            //                     case "SHOWSET":
+
+            //                         return <ShowClasswork
+            //                             key={this.state.questionSetName}
+            //                             questionSetName={this.state.questionSetName} 
+            //                             />;
+
+
+            //                     default:                                     
+            //                         return;        
+            //                 }
+            //             })()}
+
+            //         </div>
+            //     </div>
+            // </div >
+
+            <div style={{ maxHeight: "90%" }}>
+                <div className="w3-sidebar w3-light-grey w3-bar-block w3-card">
+                    <h2 className="w3-bar-item">Dashboard</h2>
+
+                    <a class="w3-bar-item w3-button w3-border-bottom" onClick={() => this.showStream}>Stream</a>
+                    <a class="w3-bar-item w3-button w3-border-bottom" >To Do</a>
+                    {
+                        this.state.displayClassworkType ? (
+                            <div>
+                                <a className="w3-bar-item w3-button w3-border-bottom" onClick={this.toggleDisplayClassworkType}>Classwork</a>
+
+                                {this.state.questionSets.map(item => {
                                     return (
-                                        <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
-                        
+
+                                        <a key={item.questionSetName} className="w3-bar-item w3-button w3-border-bottom" onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a>
+
                                     )
                                 })}
-                    </div> */}
-                    
-                    <div className="col-10" style={{ marginLeft: "16.6%" }}>
-                        
-                        {(() => {
-                            switch (this.state.content) {
+                                <a className="w3-bar-item w3-button w3-border-bottom" >Assignments</a>
+                                <a className="w3-bar-item w3-button w3-border-bottom" >Exams</a>
 
-                                case "SHOWSTREAM":
-                                    return 
-                                        <div className="col-10" style={{ marginLeft: "16.6%" }}>
-                                            <p>Hello.........</p>
-                                            {this.state.questionSets.map(item => {
-                                                
-                                                    <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
-                                    
-                                                
-                                             })}
-                                        </div>
+                            </div>
+                        ) : (
+                                <a className="w3-bar-item w3-button w3-border-bottom" onClick={this.toggleDisplayClassworkType}>Classwork</a>
+                            )
+                    }
+                    <a className="w3-bar-item w3-button w3-border-bottom" >Gradebook</a>
 
-                                case "SHOWSET":
-                                    
-                                    return <ShowClasswork
-                                        key={this.state.questionSetName}
-                                        questionSetName={this.state.questionSetName} 
-                                        />;
-                                    
-                                   
-                                default:                                     
-                                    return;        
-                            }
-                        })()}
-
-                    </div>
                 </div>
-            </div >
+
+
+                <div className="main">
+
+                    {(() => {
+                        switch (this.state.content) {
+
+                            case "SHOWSTREAM":
+                                return (
+                                    <div className="col-10" style={{ marginLeft: "16.6%" }}>
+                                        <p>Hello.........</p>
+                                        {this.state.questionSets.map(item => {
+
+                                            <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
+
+
+                                        })}
+                                    </div>
+                                )
+
+                            case "SHOWSET":
+
+                                return <ShowClasswork
+                                    key={this.state.questionSetName}
+                                    questionSetName={this.state.questionSetName}
+                                />;
+
+
+                            default:
+                                return;
+                        }
+                    })()}
+
+                </div>
+            </div>
+
 
         )
     }

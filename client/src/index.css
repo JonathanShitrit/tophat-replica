@@ -22,6 +22,19 @@ body {
   font-size: 1.5em;
 }
 
+.top-nav {
+  position: sticky;
+    top: 0;
+    z-index: 5;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: #231970;
+  color: #ffffff;
+}
+
+
 h1,h2,h3,h4,h5,h6,label,span {
   font-weight: 500;
   font-family: 'Fira Sans', sans-serif;
@@ -55,7 +68,7 @@ body, html, .App, #root, .auth-wrapper {
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  padding: 40px 55px 45px 55px;
+  padding: 20px 55px 25px;
   border-radius: 15px;
   /* border-top-left-radius: 15px;
   border-bottom-left-radius: 15px; */
@@ -67,7 +80,7 @@ body, html, .App, #root, .auth-wrapper {
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  padding: 40px 55px 45px 55px;
+  padding: 20px 55px 25px;
   border-radius: 15px;
   /* border-top-right-radius: 15px;
   border-bottom-right-radius: 15px; */
@@ -110,4 +123,12 @@ body, html, .App, #root, .auth-wrapper {
 
 .forgot-password a {
   color: #167bff;
+}
+
+.main {
+  margin-left: 20%;
+}
+
+.w3-sidebar {
+  width: 20%;
 }

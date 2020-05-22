@@ -132,52 +132,95 @@ class Instructor extends Component {
     render() {
 
         return (
-            <div className="" style={{ paddingTop: "62px", width: "100%" }}>
-                <div className="row no-gutters">
-                    <nav className="sidebar col-2" style={{ position: "fixed", left: "0", top: "0", zIndex: "5", paddingTop: "62px" }}>
-                        <h2>Question Sets</h2>
+            // <div className="" style={{ paddingTop: "62px", width: "100%" }}>
+            //     <div className="row no-gutters">
+            //         <nav className="sidebar col-2" style={{ position: "fixed", left: "0", top: "0", zIndex: "5", paddingTop: "62px" }}>
+            //             <h2>Question Sets</h2>
 
-                        <ul className="list-unstyled">
+            //             <ul className="list-unstyled">
 
-                            <li><button style={{ marginBottom: "6px" }} onClick={this.addSet}>New set &#10010;</button></li>
-                            <li><button style={{ marginBottom: "6px" }} onClick={this.addQuestion}>New question &#10010;</button></li>
-                            {/* <li><button style={{ marginBottom: "6px" }} onClick={this.showQuestions}>All questions</button></li> */}
+            //                 <li><button style={{ marginBottom: "6px" }} onClick={this.addSet}>New set &#10010;</button></li>
+            //                 <li><button style={{ marginBottom: "6px" }} onClick={this.addQuestion}>New question &#10010;</button></li>
+            //                 {/* <li><button style={{ marginBottom: "6px" }} onClick={this.showQuestions}>All questions</button></li> */}
 
-                            {this.state.questionSets.map(item => {
-                                return (
-                                    <li key={item.questionSetName}><a className="set-link" onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
-                                )
-                            })}
+            //                 {this.state.questionSets.map(item => {
+            //                     return (
+            //                         <li key={item.questionSetName}><a className="set-link" onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
+            //                     )
+            //                 })}
 
-                        </ul>
-                    </nav>
-                    <div className="col-10" style={{ marginLeft: "16.6%" }}>
-                        {(() => {
-                            switch (this.state.content) {
-                                case "ADDSET":
-                                    return <CreateSet questions={this.state.allQuestions} />;
+            //             </ul>
+            //         </nav>
+            //         <div className="col-10" style={{ marginLeft: "16.6%" }}>
+            //             {(() => {
+            //                 switch (this.state.content) {
+            //                     case "ADDSET":
+            //                         return <CreateSet questions={this.state.allQuestions} />;
 
-                                case "ADDQUESTION":
-                                    return <CreateQuestion
-                                        QuestionType={this.state.QuestionType}
-                                        changeHandler={this.changeHandler}
-                                        onSubmit={this.onSubmit}
-                                    />;
+            //                     case "ADDQUESTION":
+            //                         return <CreateQuestion
+            //                             QuestionType={this.state.QuestionType}
+            //                             changeHandler={this.changeHandler}
+            //                             onSubmit={this.onSubmit}
+            //                         />;
 
-                                case "SHOWSET":
-                                    return <ShowSet
-                                        key={this.state.questionSetName}
-                                        questionSetName={this.state.questionSetName} />;
+            //                     case "SHOWSET":
+            //                         return <ShowSet
+            //                             key={this.state.questionSetName}
+            //                             questionSetName={this.state.questionSetName} />;
 
-                                // case "SHOWQUESTIONS":
-                                //     return <ShowQuestions />;
-                                default: return;
-                            }
-                        })()}
+            //                     // case "SHOWQUESTIONS":
+            //                     //     return <ShowQuestions />;
+            //                     default: return;
+            //                 }
+            //             })()}
 
-                    </div>
+            //         </div>
+            //     </div>
+            // </div >
+
+            <div style={{ maxHeight: "90%" }}>
+                <div className="w3-sidebar w3-light-grey w3-bar-block w3-card">
+                    <h2 className="w3-bar-item">Menu</h2>
+
+
+                    <button class="w3-bar-item w3-button w3-border-bottom" onClick={this.addSet}>New set &#10010;</button>
+                    <button class="w3-bar-item w3-button w3-border-bottom" onClick={this.addQuestion}>New question &#10010;</button>
+
+                    {this.state.questionSets.map(item => {
+                        return (
+                            <a key={item.questionSetName} className="w3-bar-item w3-button w3-border-bottom" onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a>
+                        )
+                    })}
+
                 </div>
-            </div >
+                <div className="main">
+                    {(() => {
+                        switch (this.state.content) {
+                            case "ADDSET":
+                                return <CreateSet questions={this.state.allQuestions} />;
+
+                            case "ADDQUESTION":
+                                return <CreateQuestion
+                                    QuestionType={this.state.QuestionType}
+                                    changeHandler={this.changeHandler}
+                                    onSubmit={this.onSubmit}
+                                />;
+
+                            case "SHOWSET":
+                                return <ShowSet
+                                    key={this.state.questionSetName}
+                                    questionSetName={this.state.questionSetName} />;
+
+                            // case "SHOWQUESTIONS":
+                            //     return <ShowQuestions />;
+                            default: return;
+                        }
+                    })()}
+
+                </div>
+            </div>
+
 
         )
     }

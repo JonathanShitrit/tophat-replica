@@ -24,12 +24,14 @@ const Header = ({ children }) => {
         //     {children}
         // </div>
 
+        // className="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" style={{ borderRadius: "unset", height: "62px" }}
         <div>
-            <nav className="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" style={{ borderRadius: "unset", height: "62px" }}>
-                <h2 className="brand"><a href='/'>Indelible Interactive</a></h2>
-                <h3 className="about"><Link to='/about'>About</Link></h3>
-                <h3 className="contact"><Link to='/contact'>Contact</Link></h3>
-                <h3 className="logout" onClick={logout}><Link to='/'>Logout</Link></h3>
+            <nav className="top-nav">
+                <h2 className=""><a href='/'>Indelible Interactive</a></h2>
+                <h3 className=""><Link to='/help'>Help</Link></h3>
+                <h3 className=""><Link to='/about'>About</Link></h3>
+                <h3 className=""><Link to='/contact'>Contact</Link></h3>
+                <h3 className="" onClick={logout}><Link to='/'>Logout</Link></h3>
             </nav>
             {children}
         </div>

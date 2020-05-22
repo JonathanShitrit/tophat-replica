@@ -43,7 +43,7 @@ class Signup extends Component {
 
                     <button type="submit" className="btn btn-primary btn-block btn-lg">Sign up</button>
                     <p className="forgot-password text-right">
-                        Already registered <button onClick={this.props.toggelSignin}>sign in</button>
+                        Already registered <button type="button" onClick={this.props.toggelSignin}>sign in</button>
                     </p>
                 </form>
             </div>

@@ -19,7 +19,7 @@ class Signin extends Component {
 
                     <button type="submit" className="btn btn-primary btn-block btn-lg">Sign in</button>
                     <p className="forgot-password text-right">
-                        Don't have an account <button onClick={this.props.toggelSignin}>sign up</button>
+                        Don't have an account <button type="button" onClick={this.props.toggelSignin}>sign up</button>
                     </p>
                 </form>
             </div>

@@ -4,7 +4,18 @@ class About extends Component {
     render() {
         return (
             <div className="">
-                Contact
+            <p>Reach us at </p>
+            <ul>
+            <li>
+                <p><a href="mailto:karishma.muni54@qmail.cuny.edu">Karishma.Muni54 [at] qmail [dot] cuny [dot] edu </a></p>
+            </li>
+            <li>
+                <p><a href="mailto:jonathanshitrit8@gmail.com">jonathanshitrit8 [at] gmail [dot] com</a></p>
+            </li>
+            <li>
+                <p><a href="mailto:Zachary.Wing28@qmail.cuny.edu">Zachary.Wing28 [at] qmail [dot] cuny [dot] edu </a></p>
+            </li>
+            </ul>
             </div>
         )
     }

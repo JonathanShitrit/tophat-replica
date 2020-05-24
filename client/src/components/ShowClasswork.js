@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-/*
-import ShowQuestions from "./ShowQuestions";
-import InnerHTML from 'dangerously-set-html-content'
-*/
+import QuestionBox from "./QuestionBox";
 
 class ShowClasswork extends Component {
 
@@ -17,6 +14,7 @@ class ShowClasswork extends Component {
         multiChoiceAnswer: Boolean,
 
         displayQuestion: true,
+        qsQuestions: []
     }
 
     checkMultiChoiceAnswer = (isAnswer, points) => {
@@ -47,9 +45,8 @@ class ShowClasswork extends Component {
         this.loadQuestionSet();
     }
 
-    submitHandler(e) {
-        e.preventDefault();
-        alert("Submission succcessful");
+    submitHandler = () => {
+        alert('Submission succcessful');
     }
 
     loadQuestionSet = () => {
@@ -74,79 +71,21 @@ class ShowClasswork extends Component {
             .catch(err => alert(err.message));
     }
 
+    changeHandler = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+        console.log([e.target.name], e.target.value);
+    }
 
     getSetsQuestions = (ids) => {
-        var x = document.getElementById("list-questions");
-        x.innerHTML = "";
-
+        var a = [];
 
         // Loop over this set's questions array and fetch each question's data
         ids.map(id => {
             fetch(`${document.location.origin}/api/questions/questions/${id}`)
                 .then(response => response.json())
                 .then(json => {
-
-                    var z = "";
-
-                    if (json.questionType == "MULTIPLE") {
-                        z += `
-                        <div class="col-sm-10" style="padding:20px 55px 25px">
-                                <div class="card border-dark">
-                                    
-                                    <form onSubmit={this.submitHandler} className="instructor-form">
-                                    <div class="card-header"><h2>${json.questionTitle}</h2></div>
-                                    <p class="card-text">Points: ${json.points}</p>
-                                    <p class="card-text">${json.questionText}</p>
-                                    
-                                        <div className="form-group">
-                                            <div className="custom-control custom-checkbox">
-                                                <input onChange={this.setAnswer(json.choices[0].IsAnswer)} type="radio" id="choice0" style={{ margin: "20px" }} name="choice" value="json.choices[0].Choice" required />
-                                                <label htmlFor="choice0" style={{ marginRight: "10px" }}>${json.choices[0].Choice}</label>
-                                                <p class="card-text"> ${json.choices[0].IsAnswer}</p>
-                                                <input onChange={this.setAnswer(json.choices[1].IsAnswer)} type="radio" id="choice1" style={{ margin: "4px" }} name="choice" value="json.choices[1].Choice" required />
-                                                <label htmlFor="choice1" style={${{ marginRight: "50px" }}>${json.choices[1].Choice}</label>
-                                                <p class="card-text"> ${json.choices[1].IsAnswer}</p>
-                                                <input onChange={this.setAnswer(json.choices[2].IsAnswer)} type="radio" id="choice2" style={{ margin: "4px" }} name="choice" value="json.choices[2].Choice" required />
-                                                <label htmlFor="choice2" style={{ marginRight: "10px" }}>${json.choices[2].Choice}</label>
-                                                <p class="card-text"> ${json.choices[2].IsAnswer}</p>
-                                                <input onChange={this.setAnswer(json.choices[3].IsAnswer)} type="radio" id="choice3" style={{ margin: "4px" }} name="choice" value="json.choices[3].Choice" required />
-                                                <label htmlFor="choice3" style={{ marginRight: "10px" }}>${json.choices[3].Choice}</label>
-                                                <p class="card-text"> ${json.choices[3].IsAnswer}</p>
-                                                <input onChange={this.setAnswer(json.choices[4].IsAnswer)} type="radio" id="choice4" style={{ margin: "4px" }} name="choice" value="json.choices[4].Choice" required />
-                                                <label htmlFor="choice4" style={{ marginRight: "10px" }}>${json.choices[4].Choice}</label>
-                                                <p class="card-text"> ${json.choices[4].IsAnswer}</p>
-                                            </div>
-                                        </div>
-                                        <button type="button" onClick={this.submitHandler} >Submit</button>
-                                    </form>
-
-                                </div>
-                            
-                        </div>`
-                    }
-                    else {
-                        z += `<div class="col-sm-10" style="padding:20px 55px 25px">
-                        <div class="card border-dark">
-                                <form onSubmit={this.submitHandler} className="instructor-form">
-                                <div class="card-header"><h2>${json.questionTitle}</h2></div>
-                                <p class="card-text">Points: ${json.points}</p>
-                                <p class="card-text"> ${json.questionText}</p>
-                                <div className="form-group">
-                                    <label>Reponse:</label><br>
-                                    <input type="text" onChange={this.submitHandler} className="form-control" placeholder="Enter reponse" name="TextboxAnswer" required />
-                                </div>
-                                <button type="button" onClick={${this.submitHandler}} >Submit</button> 
-                            </form>
-                            <p class="card-text"> ${json.textboxAnswer}</p>
-                            </div>
-                        </div>
-
-                    </div>`
-                    }
-
-                    // Dynamically add the question card
-                    x.innerHTML += z;
-
+                    a.push(json);
+                    this.setState({ qsQuestions: a });
                 })
                 .catch(err => alert(err.message));
         })
@@ -154,12 +93,22 @@ class ShowClasswork extends Component {
     }
 
     render() {
-
         return (
 
             <div className="content" style={{ margin: "0 auto" }}>
                 <h2>{this.props.questionSetName}</h2>
-                <div id="list-questions"> <h4>Loading questions...</h4></div>
+                <div>
+                    <form id="list-questions" className="row justify-content-center" onSubmit={this.submitHandler}>
+                        {this.state.qsQuestions.length > 0 && this.state.qsQuestions.map(question => (
+                            <QuestionBox
+                                question={question}
+                                key={question._id}
+                            />
+                        ))}
+                        <br />
+                        <button type="submit" className="col-8">Submit Test</button>
+                    </form>
+                </div>
 
             </div>
 
@@ -167,5 +116,6 @@ class ShowClasswork extends Component {
     }
 
 }
+
 
 export default ShowClasswork;

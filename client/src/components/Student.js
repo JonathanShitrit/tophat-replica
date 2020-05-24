@@ -124,84 +124,7 @@ class Student extends Component {
     render() {
 
         return (
-            // <div className="" style={{ paddingTop: "62px", width: "100%" }}>
-            //     <div className="row no-gutters">
-            //         <nav className="sidebar col-2" style={{ position: "fixed", left: "0", top: "0", zIndex: "5", paddingTop: "62px" }}>
-            //             <h2>Dashboard</h2>
-
-            //             <ul className="list-unstyled">
-            //                 <li><button style={{ marginBottom: "6px" }} onClick={() => this.showStream}>Stream</button></li>
-            //                 <li><button style={{ marginBottom: "6px" }} >To Do</button></li>
-            //                 {
-            //                 this.state.displayClassworkType ? ( 
-            //                     <div> 
-            //                         <li><button style={{ marginBottom: "6px" }} onClick={this.toggleDisplayClassworkType}>Classwork</button></li>
-            //                         {/*<li><button style={{ marginBottom: "6px" }} onClick={this.showSet}>All Classwork</button></li> */}
-            //                         {this.state.questionSets.map(item => {
-            //                             return (
-            //                                 <li key={item.questionSetName}><a className="set-link" onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
-            //                             )
-            //                          })}
-            //                         <li><button style={{ marginBottom: "6px" }}>Assignments</button></li>
-            //                         <li><button style={{ marginBottom: "6px" }}>Exams</button></li>
-            //                     </div>
-            //                     ) : (
-            //                     <div>
-            //                         <li><button style={{ marginBottom: "6px" }} onClick={this.toggleDisplayClassworkType}>Classwork</button></li>
-            //                     </div>
-
-            //                     )
-            //                  }   
-            //                 <li><button style={{ marginBottom: "6px" }} >Gradebook</button></li>
-
-            //             </ul>
-            //         </nav>
-
-
-            //         {/* <div className="col-10" style={{ marginLeft: "16.6%" }}>
-            //             {this.state.questionSets.map(item => {
-            //                         return (
-            //                             <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
-
-            //                         )
-            //                     })}
-            //         </div> */}
-
-            //         <div className="col-10" style={{ marginLeft: "16.6%" }}>
-
-            //             {(() => {
-            //                 switch (this.state.content) {
-
-            //                     case "SHOWSTREAM":
-            //                         return 
-            //                             <div className="col-10" style={{ marginLeft: "16.6%" }}>
-            //                                 <p>Hello.........</p>
-            //                                 {this.state.questionSets.map(item => {
-
-            //                                         <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
-
-
-            //                                  })}
-            //                             </div>
-
-            //                     case "SHOWSET":
-
-            //                         return <ShowClasswork
-            //                             key={this.state.questionSetName}
-            //                             questionSetName={this.state.questionSetName} 
-            //                             />;
-
-
-            //                     default:                                     
-            //                         return;        
-            //                 }
-            //             })()}
-
-            //         </div>
-            //     </div>
-            // </div >
-
-            <div style={{ height: "100%" }}>
+            <div>
                 <div className="w3-sidebar w3-light-grey w3-bar-block w3-card" style={{ maxHeight: "90%" }}>
                     <h2 className="w3-bar-item">Dashboard</h2>
 
@@ -232,7 +155,7 @@ class Student extends Component {
                 </div>
 
 
-                <div className="main" style={{ height: "100%" }}>
+                <div className="main">
 
                     {(() => {
                         switch (this.state.content) {

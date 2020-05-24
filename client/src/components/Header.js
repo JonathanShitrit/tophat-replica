@@ -10,7 +10,7 @@ const Header = ({ children }) => {
     }
 
     return (
-        <div style={{ height: "100%" }}>
+        <div>
             <nav className="top-nav">
                 <h2 className=""><a href='/'>Indelible Interactive</a></h2>
                 <h3 className=""><Link to='/help'>Help</Link></h3>

@@ -171,9 +171,9 @@ class Student extends Component {
                                        
                                         <div className="card border-dark">
                                             <div className="card-header">
-                                                <h3>{this.state.questionSets.map(item => 
-                                                    <a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a>
-                                                )}</h3>
+                                                <h2>{this.state.questionSets.map(item => 
+                                                    <a href onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a>
+                                                )}</h2>
                                             </div>
                                             <div style={{ padding: "20px 45px 25px" }}></div>
                                          </div>
@@ -198,9 +198,9 @@ class Student extends Component {
                                        
                                         <div className="card border-dark">
                                             <div className="card-header">
-                                                <h3>{this.state.questionSets.map(item => 
-                                                    <a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a>
-                                                )}</h3>
+                                                <h2>{this.state.questionSets.map(item => 
+                                                    <a href onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a>
+                                                )}</h2>
                                             </div>
                                             <div style={{ padding: "20px 45px 25px" }}></div>
                                          </div>

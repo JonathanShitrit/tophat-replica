@@ -20,7 +20,7 @@ class Help extends Component {
                 <br />
                 <h3 style={leftAlign}>Future Releases</h3>
                 <p>Support for multiple choice questions with more than one correct answer.</p>
-                <p>"To Do" will display all assignments that have not been completed</p>
+                <p>"To Do" will display all assignments that have not been completed.</p>
                 <p>"Gradebook" will display scores to completed assignments.</p>
             </div>
         )

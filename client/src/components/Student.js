@@ -128,7 +128,7 @@ class Student extends Component {
                 <div className="w3-sidebar w3-light-grey w3-bar-block w3-card" style={{ maxHeight: "90%" }}>
                     <h2 className="w3-bar-item">Dashboard</h2>
 
-                    <a class="w3-bar-item w3-button w3-border-bottom" onClick={() => this.showStream}>Stream</a>
+                    <a class="w3-bar-item w3-button w3-border-bottom" onClick={this.showStream}>Stream</a>
                     <a class="w3-bar-item w3-button w3-border-bottom" >To Do</a>
                     {
                         this.state.displayClassworkType ? (
@@ -163,16 +163,22 @@ class Student extends Component {
 
                             case "SHOWSTREAM":
                                 return (
-                                    <div className="content" style={{ height: "100%" }}>
-                                        <p>Loading Questions...</p>
-                                        {this.state.questionSets.map(item => {
-
-                                            <li key={item.questionSetName}><a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a></li>
-
-
-                                        })}
+                                    
+                                    <div className="content" style={{ margin: "0 auto" }}>
+                                        <div className="row justify-content-center">
+                                        <h2>{"Stream"}</h2>
+                                        </div>
+                                       
+                                        <div className="card border-dark">
+                                            <div className="card-header">
+                                                <h3>{this.state.questionSets.map(item => 
+                                                    <a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a>
+                                                )}</h3>
+                                            </div>
+                                            <div style={{ padding: "20px 45px 25px" }}></div>
+                                         </div>
                                     </div>
-                                )
+                                );         
 
                             case "SHOWSET":
 
@@ -183,13 +189,28 @@ class Student extends Component {
 
 
                             default:
-                                return;
+                                return (
+                                    
+                                    <div className="content" style={{ margin: "0 auto" }}>
+                                        <div className="row justify-content-center">
+                                        <h2>{"Stream"}</h2>
+                                        </div>
+                                       
+                                        <div className="card border-dark">
+                                            <div className="card-header">
+                                                <h3>{this.state.questionSets.map(item => 
+                                                    <a onClick={() => this.showSet(item.questionSetName)}>{item.questionSetName}</a>
+                                                )}</h3>
+                                            </div>
+                                            <div style={{ padding: "20px 45px 25px" }}></div>
+                                         </div>
+                                    </div>
+                                );          
                         }
                     })()}
 
                 </div>
             </div>
-
 
         )
     }

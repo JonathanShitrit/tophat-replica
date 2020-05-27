@@ -114,11 +114,12 @@ class ShowClasswork extends Component {
         return (
 
             this.state.displayAssignment ? (
-
+                
                 <div className="content" style={{ margin: "0 auto" }}>
+  
                 <h2>{this.props.questionSetName}</h2>
                 <div>
-                    {/* <form id="list-questions" className="row justify-content-center" onSubmit={this.submitHandler}> */}
+                    <form id="list-questions" className="row justify-content-center" onSubmit={this.submitHandler}>
                     {this.state.qsQuestions.length > 0 && this.state.qsQuestions.map(question => (
                     
                     (question.questionType != "MULTIPLE") ? (
@@ -141,7 +142,7 @@ class ShowClasswork extends Component {
                     ))}
                         <br />
                         <button type="button" className="col-8" onClick={this.toggleDisplayAssignment} >Complete Assignment</button>
-                    {/* </form> */}
+                    </form>
                 </div>
 
             </div>

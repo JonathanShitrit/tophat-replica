@@ -14,7 +14,11 @@ class ShowClasswork extends Component {
         multiChoiceAnswer: Boolean,
 
         displayQuestion: true,
-        qsQuestions: []
+        qsQuestions: [],
+
+        textboxQuestionIndex: -1,
+
+        displayAssignment: true
     }
 
     checkMultiChoiceAnswer = (isAnswer, points) => {
@@ -92,30 +96,99 @@ class ShowClasswork extends Component {
 
     }
 
+    foo = (question) => {
+        if (question.questionType != "MULTIPLE")
+        {
+            this.setState({ textboxQuestionIndex: this.state.textboxQuestionIndex + 1 })
+        }    
+        return this.state.textboxQuestionIndex;
+    }
+
+    toggleDisplayAssignment = () => {
+        this.setState({ displayAssignment: !this.state.displayAssignment });
+    } 
+
     render() {
         return (
 
-            <div className="content" style={{ margin: "0 auto" }}>
+            this.state.displayAssignment ? (
+
+                <div className="content" style={{ margin: "0 auto" }}>
                 <h2>{this.props.questionSetName}</h2>
                 <div>
                     <form id="list-questions" className="row justify-content-center" onSubmit={this.submitHandler}>
-                        {this.state.qsQuestions.length > 0 && this.state.qsQuestions.map(question => (
+
+                        {this.state.qsQuestions.length > 0 && this.state.qsQuestions.map(question => (  
+
+
+                            
+            
+                        
+                            
                             <QuestionBox
+
                                 question={question}
                                 key={question._id}
+                                //textboxQuestionIndex={this.state.textboxQuestionIndex}
+                                //textboxQuestionIndex={foo(quesiton)}
+
+                                /*
+                                textboxQuestionIndex={
+                                (question.questionType === "TEXTBOX") ? (
+                                    this.setState({ textboxQuestionIndex: this.state.textboxQuestionIndex + 1 })
+                                    return (this.state.textBoxQuestionIndex)
+                                    
+                                ) : (
+                                    this.setState({ textboxQuestionIndex: this.state.textboxQuestionIndex })
+                                    return (this.state.textBoxQuestionIndex)));
+                                )}
+                                */
+                            
+ 
+                                    
                             />
-                        ))}
+                        ))
+                        
+
+                        
+                        }
+                        
                         <br />
-                        <button type="submit" className="col-8">Submit Test</button>
+                        <button type="button" className="col-8" onClick={this.toggleDisplayAssignment} >Complete Assignment</button>
                     </form>
                 </div>
 
             </div>
+                ) : (
+
+                    <div className="col-sm-10" style={{ marginBottom: "2%" }}>
+                    <div className="card border-dark">
+                        <div className="card-header">
+                            <h2>{this.props.questionSetName}</h2>
+
+                        </div>
+                        
+                        <div style={{ padding: "20px 45px 25px" }}>
+                            <p>{"Assignment completed"}</p>
+                            <br/>
+                            <p>{"Your score is"}</p>
+                            <button input="button" onClick={this.toggleDisplayAssignment}>Resubmit</button>
+                        </div>
+                    </div>
+                </div>  
+                
+            )
+                
+
+            
 
         )
     }
 
 }
+
+
+
 
 
 export default ShowClasswork;

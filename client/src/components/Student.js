@@ -142,8 +142,9 @@ class Student extends Component {
 
                                     )
                                 })}
-                                <a className="w3-bar-item w3-button w3-border-bottom" >Assignments</a>
-                                <a className="w3-bar-item w3-button w3-border-bottom" >Exams</a>
+                                
+                                {/* <a className="w3-bar-item w3-button w3-border-bottom" >Assignments</a>
+                                <a className="w3-bar-item w3-button w3-border-bottom" >Exams</a> */}
 
                             </div>
                         ) : (

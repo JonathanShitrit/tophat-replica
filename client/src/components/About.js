@@ -8,7 +8,7 @@ class About extends Component {
 
         return (
             <div style={{ padding: "20px" }}>
-                <p>Indelible Interact is a platform that allows instructors to create assignments ans questions that tests a students understanding of the material.</p>
+                <p>Indelible Interact is a platform that allows instructors to create assignments and questions that tests a students understanding of the material.</p>
                 <br />
                 <h2 style={leftAlign}>Karishma Muni </h2>
                 <p>
@@ -23,7 +23,7 @@ class About extends Component {
 
                 <h2 style={leftAlign}>Zachary Wing</h2>
                 <p>
-                    I am an undergraduate student at Queens College, City University of New York studying computer science and mathematics.
+                    Hi, I am an undergraduate student at Queens College, City University of New York studying computer science and mathematics.
                 </p>
             </div>
         )

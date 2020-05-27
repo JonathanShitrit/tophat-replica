@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 
+score_ = 0;
+//global.score_ = score;
+totalPoints_ = 0;
+//global.totalPoints_ = totalPoints;
+
 const QuestionBox = ({ question, textboxQuestionIndex }) => {
 
-
-    
     // Testing
 
     const [checked, setChecked] = useState(false);
@@ -11,11 +14,24 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
 
     // General question data
 
+    /*
     const [score, setScore] = useState(0);
     const setScore_ = () => {setScore(score + question.points)}
 
-    const [totalPoints, setTotalPoints] = useState(0);
-    const setTotalPoints_ = () => {setTotalPoints(totalPoints + question.points)}
+    const [points, setPoints] = useState(0);
+    const setPoints_ = () => {setPoints(points + question.points)}
+    */
+
+    
+    const [assignmentScores, setAssignmentScores] = useState([])
+    //setAssignmentScores(assignmentScores => assignmentScores.concat(score))
+    global.assignmentScores = assignmentScores;
+    //global.setAssignmentScores(assignmentScores => assignmentScores.concat(score)) = setAssignmentScores(assignmentScores => assignmentScores.concat(score))
+
+    const [assignmentPoints, setAssignmentPoints] = useState([])
+    //setAssignmentPoints(assignmentPoints => assignmentPoints.concat(points))
+    global.assignmentPoints = assignmentPoints;
+    //global.setAssignmentPoints(assignmentPoints => assignmentPoints.concat(points)) = setAssignmentPoints(assignmentPoints => assignmentPoints.concat(points))
 
     // Multi-choice
 
@@ -28,10 +44,27 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
     const setMultiChoiceAnswerAs3 = () => {setMultiChoiceAnswer(3)}
     const setMultiChoiceAnswerAs4 = () => {setMultiChoiceAnswer(4)}
     
-    const setCheckMultiChoiceAnswer_ = (event) => {  
+    const setCheckMultiChoiceAnswer_ = () => {  
         setCheckMultiChoiceAnswer(question.choices[multiChoiceAnswer].IsAnswer);
+        //event.preventDefault(); 
+    }
+
+    
+    const checkAnswer_ = () => {
         toggleDisplayQuestion();
-        event.preventDefault(); 
+        addPoints();
+        //event.preventDefault(); 
+    }
+    
+
+    const addPoints = () => {
+        if (checkMultiChoiceAnswer) {
+            setAssignmentScores(assignmentScores => assignmentScores.concat(question.points));
+            score_ = score_ + question.points;
+        }
+        setAssignmentPoints(assignmentPoints => assignmentPoints.concat(question.points));
+        totalPoints_ = totalPoints_ + question.points;
+        //event.preventDefault(); 
     }
 
     // Textbox
@@ -39,52 +72,36 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
     const [textboxAnswer, setTextboxAnswer] = useState("wrong");
     const [checkTextboxAnswer, setCheckTextboxAnswer] = useState(false);
 
-    
-    /*
-    const [textboxQuestionIndex, setTextboxQuestionIndex] = useState(0);
-
-    const setTextboxQuestionIndex_ = () => {
-        setTextboxQuestionIndex(9);
-        
-    }
-    */
-
-    const setTextboxAnswer_ = (event) => {
-        setTextboxAnswer( String( document.getElementsByName('TextboxAnswer')[(0)].value) );
-        //setTextboxQuestionIndex(textboxQuestionIndex + 1)
-        //setTextboxAnswer( String( document.getElementsById('textboxInput').value) );
-
-        //alert( String( document.getElementsByName('TextboxAnswer')[0].value ) );
-        /*
-        if ( String(textboxAnswer) == String(question.textboxAnswer) ) {
-            setCheckTextboxAnswer(true); 
-        }
-        */
-        event.preventDefault();
+    const setTextboxAnswer_ = () => {
+        //setTextboxAnswer( String( document.getElementsByName('TextboxAnswer')[(textboxQuestionIndex)].value) );
+        setTextboxAnswer( document.getElementsByName('TextboxAnswer')[(textboxQuestionIndex)].value );
+        //event.preventDefault();        
     }
 
-    const setCheckTextboxAnswer_ = (event) => {
+    const setCheckTextboxAnswer_ = () => {
         if ( String(textboxAnswer) == String(question.textboxAnswer) ) {
             setCheckTextboxAnswer(true);
-            setScore_();
+            setAssignmentScores(assignmentScores => assignmentScores.concat(question.points));
+            score_ = score_ + question.points;
         }
-        setTotalPoints_();
+        setAssignmentPoints(assignmentPoints => assignmentPoints.concat(question.points));
+        totalPoints_ = totalPoints_ + question.points;
+
         resetTextboxAnswer();
         toggleDisplayQuestion();
-        event.preventDefault();
-        
+        //event.preventDefault();
     }
 
     const resetTextboxAnswer = () => {
-        setTextboxAnswer("");
-        setCheckTextboxAnswer(false);   
+        setTextboxAnswer("wrong");
+        setCheckTextboxAnswer(false); 
     }
 
     const [displayQuestion, setDisplayQuestion] = useState(true);
 
     const toggleDisplayQuestion = () => {
         setDisplayQuestion(!displayQuestion);
-        event.preventDefault();
+        //event.preventDefault();
     }
 
     const [displayAssignment, setDisplayAssignment] = useState(true);
@@ -93,145 +110,21 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
         setDisplayAssignment(!displayAssignment);
     }
 
- 
-/*    
-return(
-        displayAssignment ? (
-            <div>
-            {(question.questionType === "MULTIPLE") ? (
-                
-                    displayQuestion ? (
-        
-                        <div className="col-sm-10" style={{ marginBottom: "2%" }}>
-                            <div className="card border-dark">
-                                <div className="card-header">
-                                    <h2>{question.questionTitle}</h2>
-                                </div>
-                                <div style={{ padding: "20px 45px 25px" }}>
-        
-                                    <p className="card-text">{question.questionText}</p>
-                                    
-                                    <div>
-                                        <input type="checkbox" id="choice0" onChange={setMultiChoiceAnswerAs0} style={{ margin: "4px" }} name="choice" value={question.choices[1].Choice} />
-                                        <label for="choice0" style={{ marginRight: "10px" }}>{question.choices[0].Choice}</label>
-                                    </div>
-                                    <div>Is checked? {String(checked)}</div>
-                                    <div>
-                                        <input type="checkbox" id="choice1" onChange={setMultiChoiceAnswerAs1} style={{ margin: "4px" }} name="choice" value={question.choices[1].Choice} />
-                                        <label for="choice1" style={{ marginRight: "10px" }}>{question.choices[1].Choice}</label>
-                                    <div>Is marked as answer? {String(multiChoiceAnswer)}</div>
-                                    </div>
-                                    <div>
-                                        <input type="checkbox" id="choice2" onChange={setMultiChoiceAnswerAs2} style={{ margin: "4px" }} name="choice" value={question.choices[2].Choice} />
-                                        <label for="choice2" style={{ marginRight: "10px" }}>{question.choices[2].Choice}</label>
-                                    </div>
-                                    <div>
-                                        <input type="checkbox" id="choice3" onChange={setMultiChoiceAnswerAs3} style={{ margin: "4px" }} name="choice" value={question.choices[3].Choice} />
-                                        <label for="choice3" style={{ marginRight: "10px" }}>{question.choices[3].Choice}</label>
-                                    </div>
-                                    <div>
-                                        <input type="checkbox" id="choice4" onChange={setMultiChoiceAnswerAs4} style={{ margin: "4px" }} name="choice" value={question.choices[4].Choice} />
-                                        <label for="choice4" style={{ marginRight: "10px" }}>{question.choices[4].Choice}</label>
-                                    </div>
-                                    <button input="button" onClick={setCheckMultiChoiceAnswer_}>Save answer</button>
-                                    
-                                    <div>Did you get the correct answer? {String(checkMultiChoiceAnswer)}</div>
-                                </div>
-                            </div>
-                        </div>
-                        ) : (
-                            <div className="col-sm-10" style={{ marginBottom: "2%" }}>
-        
-                                <div className="card border-dark">
-                                    <div className="card-header">
-                                        <h2>{question.questionTitle}</h2>
-                                    </div>
-                                    
-                                    <div style={{ padding: "20px 45px 25px" }}>
-                                        <p className="card-text">Points: {question.points}</p>
-                                        <p className="card-text" >{question.questionText}</p>
-                                        <div>{"Your answer has been recorded"}</div>
-                                        <button input="button" onClick={toggleDisplayQuestion}>Change answer</button>
-                                    </div>
-                                </div>
-                            </div>  
-                            )
-                        
-              ) : (
-                displayQuestion ? (
-                    <div className="col-sm-10" style={{ marginBottom: "2%" }}>
-                        <div>{String(textboxQuestionIndex)}</div>
-                        <div>{String(score)}</div>
-                        <div>{String(totalPoints)}</div>
-                        <div className="card border-dark">
-                            <div className="card-header">
-                                <h2>{question.questionTitle}</h2>
-                            </div>
-                            <div style={{ padding: "20px 45px 25px" }}>
-                                <p className="card-text">Points: {question.points}</p>
-                                <p className="card-text" >{question.questionText}</p>
-                                <div className="form-group">
-                                    <label>Reponse:</label>
-                                    <br />
-                                    <input type="text" id="textboxInput" className="form-control" placeholder="Enter reponse" name="TextboxAnswer" />
-                                </div>
-                                <button input="button" onClick={setTextboxAnswer_} >Save answer</button>
-                                <div>{String( textboxAnswer )}</div>
-                                <button input="button" onClick={setCheckTextboxAnswer_}>Submit</button>
-                                <div>Did you get the correct answer? {String( checkTextboxAnswer )}</div>
-                            </div>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="col-sm-10" style={{ marginBottom: "2%" }}>
-                        <div className="card border-dark">
-                            <div className="card-header">
-                                <h2>{question.questionTitle}</h2>
-                            </div>
-                            
-                            <div style={{ padding: "20px 45px 25px" }}>
-                                <p className="card-text">Points: {question.points}</p>
-                                <p className="card-text" >{question.questionText}</p>
-                                <div>{"Your answer has been recorded"}</div>
-                                <button input="button" onClick={toggleDisplayQuestion}>Change answer</button>
-                            </div>
-                        </div>
-                    </div>  
-                    )
-            
-              )}
-              <button input="button" onClick={toggleDisplayAssignment}>Resubmit</button>
-            </div>
-            
-        ) : (
-            <div className="col-sm-10" style={{ marginBottom: "2%" }}>
-                <div className="card border-dark">
-                    <div className="card-header">
-                        <h2>{"Assignment Completed"}</h2>
-                    </div>
-                    
-                    <div style={{ padding: "20px 45px 25px" }}>
-                        <div>{"Your score is"}</div>
-                        <button input="button" onClick={toggleDisplayAssignment}>Resubmit</button>
-                    </div>
-                </div>
-            </div>  
-            )
-    
-*/  
-
-
     if (question.questionType === "MULTIPLE") {
         return (
             displayQuestion ? (
 
                 <div className="col-sm-10" style={{ marginBottom: "2%" }}>
+                        {/* <div>{String(global.assignmentScores)}</div>
+                        <div>{String(global.assignmentPoints)}</div> */}
+                        {/* <div>{String(score_)}</div>
+                        <div>{String(totalPoints_)}</div> */}
                     <div className="card border-dark">
                         <div className="card-header">
                             <h2>{question.questionTitle}</h2>
                         </div>
                         <div style={{ padding: "20px 45px 25px" }}>
-
+                            <p className="card-text">Points: {question.points}</p>
                             <p className="card-text">{question.questionText}</p>
                             
                             <div>
@@ -256,15 +149,19 @@ return(
                                 <input type="checkbox" id="choice4" onChange={setMultiChoiceAnswerAs4} style={{ margin: "4px" }} name="choice" value={question.choices[4].Choice} />
                                 <label for="choice4" style={{ marginRight: "10px" }}>{question.choices[4].Choice}</label>
                             </div>
-                            <br/>
-                            <button input="button" onClick={setCheckMultiChoiceAnswer_}>Submit</button>
+                            <button input="button" onClick={setCheckMultiChoiceAnswer_}>Save answer</button>
+                            <p/>
+                            <button input="button" onClick={checkAnswer_}>Submit</button>
                             {/* <div>Did you get the correct answer? {String(checkMultiChoiceAnswer)}</div> */}
                         </div>
                     </div>
                 </div>
                 ) : (
                     <div className="col-sm-10" style={{ marginBottom: "2%" }}>
-
+                        {/* <div>{String(global.assignmentScores)}</div>
+                        <div>{String(global.assignmentPoints)}</div> */}
+                        {/* <div>{String(score_)}</div>
+                        <div>{String(totalPoints_)}</div> */}
                         <div className="card border-dark">
                             <div className="card-header">
                                 <h2>{question.questionTitle}</h2>
@@ -275,7 +172,7 @@ return(
                                 <p className="card-text" >{question.questionText}</p>
                                 <div>{"You have completed this question."}</div>
                                 <br/>
-                                <button input="button" onClick={toggleDisplayQuestion}>Change answer</button>
+                                {/* <button input="button" onClick={toggleDisplayQuestion}>Change answer</button> */}
                             </div>
                         </div>
                     </div>  
@@ -286,9 +183,11 @@ return(
             return (            
                 displayQuestion ? (
                     <div className="col-sm-10" style={{ marginBottom: "2%" }}>
-                        {/* <div>{String(textboxQuestionIndex)}</div>
-                        <div>{String(score)}</div>
-                        <div>{String(totalPoints)}</div> */}
+                        {/* <div>{String(textboxQuestionIndex)}</div> */}
+                        {/* <div>{String(global.assignmentScores)}</div>
+                        <div>{String(global.assignmentPoints)}</div> */}
+                        {/* <div>{String(score_)}</div>
+                        <div>{String(totalPoints_)}</div> */}
                         <div className="card border-dark">
                             <div className="card-header">
                                 <h2>{question.questionTitle}</h2>
@@ -301,7 +200,7 @@ return(
                                     <br />
                                     <input type="text" id="textboxInput" className="form-control" placeholder="Enter reponse" name="TextboxAnswer" />
                                 </div>
-                                <button input="button" onClick={setTextboxAnswer_} >Save answer</button>
+                                <button input="button" onClick={setTextboxAnswer_}>Save answer</button>
                                 {/* <div>{String( textboxAnswer )}</div> */}
                                 <p/>
                                 <button input="button" onClick={setCheckTextboxAnswer_}>Submit</button>
@@ -311,6 +210,10 @@ return(
                     </div>
                 ) : (
                     <div className="col-sm-10" style={{ marginBottom: "2%" }}>
+                        {/* <div>{String(global.assignmentScores)}</div>
+                        <div>{String(global.assignmentPoints)}</div> */}
+                        {/* <div>{String(score_)}</div>
+                        <div>{String(totalPoints_)}</div> */}
                         <div className="card border-dark">
                             <div className="card-header">
                                 <h2>{question.questionTitle}</h2>
@@ -321,7 +224,7 @@ return(
                                 <p className="card-text" >{question.questionText}</p>
                                 <div>{"You have completed this question"}</div>
                                 <br/>
-                                <button input="button" onClick={toggleDisplayQuestion}>Change answer</button>
+                                {/* <button input="button" onClick={toggleDisplayQuestion}>Change answer</button> */}
                             </div>
                         </div>
                     </div>  
@@ -330,22 +233,6 @@ return(
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 }
 
 export default QuestionBox;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import QuestionBox from "./QuestionBox";
+//import './global.js';
 
 class ShowClasswork extends Component {
 
@@ -16,10 +17,16 @@ class ShowClasswork extends Component {
         displayQuestion: true,
         qsQuestions: [],
 
-        textboxQuestionIndex: -1,
+        //textboxQuestionIndex: -1,
 
         displayAssignment: true
     }
+
+    static score_ = 0;
+    //global.score_ = score_;
+
+    static pointTotal_= 0;
+    //global.pointTotal_ = pointTotal_;
 
     checkMultiChoiceAnswer = (isAnswer, points) => {
         if (isAnswer) {
@@ -49,8 +56,9 @@ class ShowClasswork extends Component {
         this.loadQuestionSet();
     }
 
-    submitHandler = () => {
-        alert('Submission succcessful');
+    submitHandler = (event) => {
+        //alert('Submission succcessful');
+        event.preventDefault();
     }
 
     loadQuestionSet = () => {
@@ -96,19 +104,13 @@ class ShowClasswork extends Component {
 
     }
 
-    foo = (question) => {
-        if (question.questionType != "MULTIPLE")
-        {
-            this.setState({ textboxQuestionIndex: this.state.textboxQuestionIndex + 1 })
-        }    
-        return this.state.textboxQuestionIndex;
-    }
-
     toggleDisplayAssignment = () => {
         this.setState({ displayAssignment: !this.state.displayAssignment });
     } 
 
     render() {
+        
+        var textboxQuestionIndex = -1;
         return (
 
             this.state.displayAssignment ? (
@@ -117,42 +119,26 @@ class ShowClasswork extends Component {
                 <h2>{this.props.questionSetName}</h2>
                 <div>
                     <form id="list-questions" className="row justify-content-center" onSubmit={this.submitHandler}>
-
-                        {this.state.qsQuestions.length > 0 && this.state.qsQuestions.map(question => (  
-
-
-                            
-            
-                        
-                            
+                    {this.state.qsQuestions.length > 0 && this.state.qsQuestions.map(question => (
+                    
+                    (question.questionType != "MULTIPLE") ? (
+                        <QuestionBox
+                            question={question}
+                            key={question._id}
+                            textboxQuestionIndex = {
+                                textboxQuestionIndex = textboxQuestionIndex + 1
+                            }
+                        />
+                        ) : (
                             <QuestionBox
-
-                                question={question}
-                                key={question._id}
-                                //textboxQuestionIndex={this.state.textboxQuestionIndex}
-                                //textboxQuestionIndex={foo(quesiton)}
-
-                                /*
-                                textboxQuestionIndex={
-                                (question.questionType === "TEXTBOX") ? (
-                                    this.setState({ textboxQuestionIndex: this.state.textboxQuestionIndex + 1 })
-                                    return (this.state.textBoxQuestionIndex)
-                                    
-                                ) : (
-                                    this.setState({ textboxQuestionIndex: this.state.textboxQuestionIndex })
-                                    return (this.state.textBoxQuestionIndex)));
-                                )}
-                                */
-                            
- 
-                                    
-                            />
-                        ))
-                        
-
-                        
-                        }
-                        
+                            question={question}
+                            key={question._id}
+                            textboxQuestionIndex = {
+                                textboxQuestionIndex = textboxQuestionIndex
+                            }
+                        />
+                        )
+                    ))}
                         <br />
                         <button type="button" className="col-8" onClick={this.toggleDisplayAssignment} >Complete Assignment</button>
                     </form>
@@ -161,34 +147,25 @@ class ShowClasswork extends Component {
             </div>
                 ) : (
 
-                    <div className="col-sm-10" style={{ marginBottom: "2%" }}>
+                    <div className="content" style={{ margin: "0 auto" }}>
                     <div className="card border-dark">
                         <div className="card-header">
                             <h2>{this.props.questionSetName}</h2>
-
                         </div>
-                        
                         <div style={{ padding: "20px 45px 25px" }}>
-                            <p>{"Assignment completed"}</p>
+                            <div>{"Assignment completed"}</div>
                             <br/>
-                            <p>{"Your score is"}</p>
-                            <button input="button" onClick={this.toggleDisplayAssignment}>Resubmit</button>
+                            {/* <p>{"Your score is " + assignmentScores + " / " + assignmentPoints}</p> */}
+                            <div>{"Your score is " + global.score_ + " / " + global.totalPoints_}</div>
+                           {/* <button input="button" onClick={this.toggleDisplayAssignment}>Resubmit</button> */}
                         </div>
                     </div>
                 </div>  
                 
             )
-                
-
-            
-
         )
     }
 
 }
-
-
-
-
 
 export default ShowClasswork;

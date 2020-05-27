@@ -30,6 +30,7 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.6.3",
     "react-router-dom": "^5.1.2",
+    "reactn": "^2.2.7",
     "request": "^2.88.2"
   }
 }

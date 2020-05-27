@@ -8,7 +8,7 @@ totalPoints_ = 0;
 const QuestionBox = ({ question, textboxQuestionIndex }) => {
 
     // Testing
-
+    
     const [checked, setChecked] = useState(false);
     const setCheckCheck = () => {setChecked(!checked)}
 
@@ -76,26 +76,33 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
         //setTextboxAnswer( String( document.getElementsByName('TextboxAnswer')[(textboxQuestionIndex)].value) );
         setTextboxAnswer( document.getElementsByName('TextboxAnswer')[(textboxQuestionIndex)].value );
         //event.preventDefault();        
+        setTextboxQuestionI_();
     }
 
     const setCheckTextboxAnswer_ = () => {
-        if ( String(textboxAnswer) == String(question.textboxAnswer) ) {
-            setCheckTextboxAnswer(true);
+        //event.preventDefault();
+        toggleDisplayQuestion();
+        addPointsText();
+        resetTextboxAnswer();
+        //event.preventDefault();
+    }
+
+    const addPointsText = () => {
+        if ( textboxAnswer == question.textboxAnswer ) {
+            //setCheckTextboxAnswer(true);
             setAssignmentScores(assignmentScores => assignmentScores.concat(question.points));
             score_ = score_ + question.points;
         }
         setAssignmentPoints(assignmentPoints => assignmentPoints.concat(question.points));
         totalPoints_ = totalPoints_ + question.points;
-
-        resetTextboxAnswer();
-        toggleDisplayQuestion();
-        //event.preventDefault();
     }
 
     const resetTextboxAnswer = () => {
         setTextboxAnswer("wrong");
         setCheckTextboxAnswer(false); 
     }
+
+    // Toggle
 
     const [displayQuestion, setDisplayQuestion] = useState(true);
 
@@ -109,6 +116,7 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
     const toggleDisplayAssignment = () => {
         setDisplayAssignment(!displayAssignment);
     }
+
 
     if (question.questionType === "MULTIPLE") {
         return (
@@ -183,7 +191,7 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
             return (            
                 displayQuestion ? (
                     <div className="col-sm-10" style={{ marginBottom: "2%" }}>
-                        {/* <div>{String(textboxQuestionIndex)}</div> */}
+                        {/* <div>{textboxQuestionIndex}</div> */}
                         {/* <div>{String(global.assignmentScores)}</div>
                         <div>{String(global.assignmentPoints)}</div> */}
                         {/* <div>{String(score_)}</div>
@@ -198,11 +206,12 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
                                 <div className="form-group">
                                     <label>Reponse:</label>
                                     <br />
-                                    <input type="text" id="textboxInput" className="form-control" placeholder="Enter reponse" name="TextboxAnswer" />
+                                    <input type="text" className="form-control" placeholder="Enter reponse" name="TextboxAnswer" />
                                 </div>
                                 <button input="button" onClick={setTextboxAnswer_}>Save answer</button>
                                 {/* <div>{String( textboxAnswer )}</div> */}
                                 <p/>
+                                
                                 <button input="button" onClick={setCheckTextboxAnswer_}>Submit</button>
                                 {/* <div>Did you get the correct answer? {String( checkTextboxAnswer )}</div> */}
                             </div>
@@ -210,6 +219,7 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
                     </div>
                 ) : (
                     <div className="col-sm-10" style={{ marginBottom: "2%" }}>
+                        {/* {<div>{textboxQuestionIndex}</div>} */}
                         {/* <div>{String(global.assignmentScores)}</div>
                         <div>{String(global.assignmentPoints)}</div> */}
                         {/* <div>{String(score_)}</div>
@@ -218,11 +228,14 @@ const QuestionBox = ({ question, textboxQuestionIndex }) => {
                             <div className="card-header">
                                 <h2>{question.questionTitle}</h2>
                             </div>
-                            
                             <div style={{ padding: "20px 45px 25px" }}>
+                            <p className="card-text" >{question.questionText}</p>
+                            <div className="form-group">
+                                    <input type="text" className="form-control" placeholder="Response submitted" name="TextboxAnswer" />
+                                </div>
+                            
                                 {/* <p className="card-text">Points: {question.points}</p> */}
-                                <p className="card-text" >{question.questionText}</p>
-                                <div>{"You have completed this question"}</div>
+                                <div>{"You have completed this question."}</div>
                                 <br/>
                                 {/* <button input="button" onClick={toggleDisplayQuestion}>Change answer</button> */}
                             </div>
